@@ -1,0 +1,114 @@
+html{
+  font-family: 'Lato', sans-serif;
+  height: 100vh;
+}
+
+.mdl-mini-footer{
+  padding: 8px 8px 12px 8px;
+}
+.CompanyTitle{
+  font-family: 'Lobster', cursive;
+  font-size: 40px;
+}
+
+
+/* card */
+
+.mdl-card{
+  margin: 10px;
+}
+.card-wide{
+  width: 60%;
+  margin: 10px auto;
+}
+
+
+
+/* top tabs */
+.tab-space{
+  width: 20%;
+}
+
+
+/* side tabs */
+.info-border{
+  border-left: 1px solid rgba(10, 11, 49, 0.20);
+}
+.mdl-tabs__panel {
+  display: none;
+}
+.vertical-mdl-tabs .mdl-tabs__tab-bar {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    align-self: flex-start;
+    padding-bottom: 35px;
+    height: inherit;
+    border-bottom: none;
+}
+
+
+.vertical-mdl-tabs .mdl-tabs__tab:hover {
+  background: rgba(158, 158, 158, 0.34);
+  color: black;
+}
+
+.vertical-mdl-tabs.mdl-tabs.is-upgraded a.mdl-tabs__tab.is-active {
+    border-bottom: 3px solid rgb(33, 150, 243);
+}
+.vertical-mdl-tabs.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
+    content: inherit;
+    height: 0;
+}
+
+.vertical-mdl-tabs.mdl-tabs.is-upgraded .mdl-tabs__panel.is-active, .mdl-tabs__panel {
+    padding: 0 30px;
+}
+
+.vertical-mdl-tabs.mdl-tabs .mdl-tabs__tab {
+    text-align: left;
+}
+
+
+/* notes */
+
+.notes-input{
+  width: 100%;
+}
+
+.save-button{
+  text-align: right;
+}
+
+/* mini-card */
+
+.mini-card .mini-title .mini-card-footer{
+  width: auto;
+  min-height: auto;
+  height: auto;
+}
+.mini-card{
+  color: white;
+  height: auto;
+  width: auto;
+  min-height: 100px;
+  min-width: 200px;
+}
+.mini-title .mini-sub{
+  margin: 2px 0;
+  width: auto;
+  height: auto;
+}
+
+.mini-title {
+  padding: 5px 16px;
+}
+.mini-title-font{
+  font-size: 20px;
+  margin: 2px;
+  padding: 0;
+  color: white;
+}
+.delete-button{
+  float: right;
+}
