@@ -1,13 +1,16 @@
 {
-  "name": "nyt-react",
+  "name": "mern",
   "version": "1.0.0",
-  "description": "",
+  "description": "Job Tracker",
   "main": "server.js",
   "scripts": {
     "server": "node server.js",
-    "client": "node scripts/start-client.js",
-    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
-    "build": "node scripts/build.js"
+    "client": "cd client && npm run start",
+   "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push heroku master",
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "installDeps": "yarn && cd client && yarn"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +21,16 @@
   "dependencies": {
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14",
+    "bcrypt": "^1.0.3",
     "mongoose": "^4.13.3"
   }
 }
