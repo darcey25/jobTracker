@@ -12,6 +12,8 @@ html{
 }
 
 
+
+
 /* card */
 
 .mdl-card{
@@ -22,12 +24,6 @@ html{
   margin: 10px auto;
 }
 
-
-
-/* top tabs */
-.tab-space{
-  width: 20%;
-}
 
 
 /* side tabs */
@@ -111,4 +107,26 @@ html{
 }
 .delete-button{
   float: right;
+}
+
+.mdl-list__item--two-line {
+    height: 150px;
+}
+
+
+/* media queries */
+
+@media only screen and (max-width:550px) {
+.mdl-layout__tab{
+  font-size: 11px;
+}
+
+}
+
+@media only screen and (max-width:835px) {
+.card-wide{
+  width: 90%;
+  margin: 10px auto;
+}
+
 }
