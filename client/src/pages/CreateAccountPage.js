@@ -92,7 +92,6 @@ class CreateAccountPage extends Component {
                   primary
                   buttonStyle={{
                     color: 'white',
-                    backgroundColor: '#03A9F4',
                   }}
                    type="submit">
                   Create

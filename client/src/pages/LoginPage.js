@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { update } from '../services/withUser';
-
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 class LoginPage extends Component {
   state = {
@@ -82,7 +82,6 @@ class LoginPage extends Component {
                 <RaisedButton primary type="submit"
                 buttonStyle={{
                     color: 'white',
-                    backgroundColor: '#03A9F4',
                   }}
                   >
                   Log In
@@ -104,4 +103,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default muiThemeable()(LoginPage);
