@@ -2,8 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
-import Drawer from './Drawer';
-
+import  Sidedrawer from './Sidedrawer';
 import LoginButton from './LoginButton';
 import LoginMenu from './LoginMenu';
 
@@ -27,16 +26,22 @@ const Navbar = (props) => {
       });
   }
   return (
+    <div>
+
     <AppBar
-      title="PassportJS Example"
+      title="Cool App Name"
       showMenuIconButton={true}
       iconElementLeft={
-            <Drawer/>
-          }
+        <Sidedrawer/>
+      }
       iconElementRight={user ?
         <LoginMenu username={username} onLogOut={handleLogOut} />
         : <LoginButton onClick={handleLogIn} />}
-    />
+    >
+
+    </AppBar>
+    </div>
+
   )
 };
 
