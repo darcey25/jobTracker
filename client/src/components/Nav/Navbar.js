@@ -2,11 +2,11 @@ import axios from 'axios';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
-import  Sidedrawer from './Sidedrawer';
-import LoginButton from './LoginButton';
-import LoginMenu from './LoginMenu';
+import  Sidedrawer from '../Sidedrawer';
+import LoginButton from '../LoginButton';
+import LoginMenu from '../LoginMenu';
 
-import { update } from '../services/withUser';
+import { update } from '../../services/withUser';
 
 const Navbar = (props) => {
   const { user } = props;
@@ -27,9 +27,13 @@ const Navbar = (props) => {
   }
   return (
     <div>
-
     <AppBar
-
+      style={{
+        fontFamily: 'Lobster, cursive',
+        color: 'white',
+        backgroundColor: '#03A9F4',
+      }}
+      className="AppBar"
       title="Cool App Name"
       showMenuIconButton={true}
       iconElementLeft={
@@ -38,8 +42,7 @@ const Navbar = (props) => {
       iconElementRight={user ?
         <LoginMenu username={username} onLogOut={handleLogOut} />
         : <LoginButton onClick={handleLogIn} />}
-    >
-  
+        >
     </AppBar>
     </div>
 
