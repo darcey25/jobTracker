@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Navbar from './components/Navbar';
-
 import { withUser, update } from './services/withUser';
 
 import CreateAccountPage from './pages/CreateAccountPage';
