@@ -31,7 +31,6 @@ const Navbar = (props) => {
       style={{
         fontFamily: 'Lobster, cursive',
         color: 'white',
-        backgroundColor: '#03A9F4',
       }}
       className="AppBar"
       title="Cool App Name"
