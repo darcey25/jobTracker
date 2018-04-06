@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { update } from '../services/withUser';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 class LoginPage extends Component {
   state = {
@@ -50,7 +51,11 @@ class LoginPage extends Component {
         <Row>
           <Col xs={6} xsOffset={3}>
             <form onSubmit={this.handleLogin}>
-              <h1>Log In</h1>
+              <h1
+                style={{
+                  fontFamily: 'Lobster, cursive',
+                }}
+                >Log In</h1>
               {error &&
                 <div>
                   {error}
@@ -74,7 +79,11 @@ class LoginPage extends Component {
                 />
               </div>
               <div>
-                <RaisedButton primary type="submit">
+                <RaisedButton primary type="submit"
+                buttonStyle={{
+                    color: 'white',
+                  }}
+                  >
                   Log In
                 </RaisedButton>
               </div>
@@ -94,4 +103,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default muiThemeable()(LoginPage);
