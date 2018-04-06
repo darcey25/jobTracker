@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import Navbar from './components/Navbar';
+import {lightBlue500} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Navbar from './components/Nav';
 import { withUser, update } from './services/withUser';
 
 import CreateAccountPage from './pages/CreateAccountPage';
@@ -12,6 +13,7 @@ import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 class App extends Component {
+
   componentDidMount() {
     // this is going to double check that the user is still actually logged in
     // if the app is reloaded. it's possible that we still have a user in sessionStorage
@@ -29,11 +31,18 @@ class App extends Component {
         }
       });
   }
+
   render() {
     const { user } = this.props;
+
+    const muiTheme = getMuiTheme({
+    palette: {
+      textColor: lightBlue500,
+    },
+  });
     return (
       <Router>
-        <MuiThemeProvider>
+        <MuiThemeProvider style={muiTheme}>
           <Fragment>
             <Navbar
               user={user}

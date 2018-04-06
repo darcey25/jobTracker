@@ -3,7 +3,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
-import {red500, yellow500, blue500} from 'material-ui/styles/colors';
+import {white} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 
 
@@ -22,8 +22,8 @@ export default class DrawerUndockedExample extends React.Component {
     return (
       <div>
      <IconButton
-     onClick={this.handleToggle}>   
-     <FontIcon className="material-icons" color={red500}>dehaze</FontIcon>
+     onClick={this.handleToggle}>
+     <FontIcon className="material-icons" color={white}>dehaze</FontIcon>
     </IconButton>
         <Drawer
           docked={false}
@@ -31,7 +31,13 @@ export default class DrawerUndockedExample extends React.Component {
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
-        <h1>Cool App Name</h1>
+        <h1
+          style={{
+            fontFamily: 'Lobster, cursive',
+            marginLeft: 5,
+            marginRight: 5,
+          }}
+          >Cool App Name</h1>
           <MenuItem onClick={this.handleClose}>Jobs</MenuItem>
           <MenuItem onClick={this.handleClose}>Calender</MenuItem>
           <MenuItem onClick={this.handleClose}>Map</MenuItem>
