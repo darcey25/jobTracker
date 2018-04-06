@@ -16,7 +16,9 @@ const LoginMenu = (props) => {
       anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
     >
       <MenuItem primaryText={username} />
-      <MenuItem primaryText="Log out" onClick={onLogOut} />
+      <MenuItem
+        primaryText="Log out"
+        onClick={onLogOut} />
     </IconMenu>
   )
 };

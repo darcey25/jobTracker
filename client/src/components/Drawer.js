@@ -1,10 +1,8 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import FontIcon from 'material-ui/FontIcon';
-import {white} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
-
+import FontIcon from 'material-ui/FontIcon';
 
 export default class DrawerUndockedExample extends React.Component {
 
@@ -20,27 +18,18 @@ export default class DrawerUndockedExample extends React.Component {
   render() {
     return (
       <div>
-     <IconButton
-     onClick={this.handleToggle}>
-     <FontIcon className="material-icons" color={white}>dehaze</FontIcon>
-    </IconButton>
+        <IconButton
+      label="Open Drawer"
+      onClick={this.handleToggle} ><FontIcon className="material-icons">home</FontIcon>
+      </IconButton>
         <Drawer
           docked={false}
           width={200}
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
-        <h1
-          style={{
-            fontFamily: 'Lobster, cursive',
-            marginLeft: 5,
-            marginRight: 5,
-          }}
-          >Cool App Name</h1>
-          <MenuItem onClick={this.handleClose}>Jobs</MenuItem>
-          <MenuItem onClick={this.handleClose}>Calender</MenuItem>
-          <MenuItem onClick={this.handleClose}>Map</MenuItem>
-          <MenuItem onClick={this.handleClose}>Help</MenuItem>
+          <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
+          <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
         </Drawer>
       </div>
     );
