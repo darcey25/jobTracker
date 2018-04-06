@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import { withUser } from '../services/withUser';
+import AddCard from '../components/AddCard';
+import SmallCard from '../components/SmallCard';
 
 class HomePage extends Component {
   state = {
@@ -36,13 +38,19 @@ class HomePage extends Component {
         {user && stuff &&
           <div>
             Welcome back, {user.username}!
+
           <List>
            {stuff.map((s, i) => <ListItem key={i} primaryText={s} />)}
           </List>
+          <SmallCard/>
+          <AddCard/>
           </div>
         }
         {user && !stuff &&
-          <div>Hold on, looking for your stuff...</div>
+           
+          <div>
+            <AddCard/>
+          </div>
         }
         {!user &&
           <div>Hey! I don't recognize you! Register and log in using the link above</div>
