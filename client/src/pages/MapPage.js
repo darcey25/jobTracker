@@ -5,7 +5,8 @@ import MapContainer from '../components/Map/MapContainer';
 
 class MapPage extends Component {
   state = {
-    stuff: null
+    stuff: null,
+    locations: [""]
   }
   componentDidMount() {
     // only try loading stuff if the user is logged in.
