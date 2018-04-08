@@ -5,6 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import  Sidedrawer from '../Sidedrawer';
 import LoginButton from '../LoginButton';
 import LoginMenu from '../LoginMenu';
+import Navtabs from '../Navtabs';
 
 import { update } from '../../services/withUser';
 
@@ -31,9 +32,13 @@ const Navbar = (props) => {
       style={{
         fontFamily: 'Lobster, cursive',
         color: 'white',
+        height: 112,
+      }}
+      titleStyle = {{
+        height: "auto",
       }}
       className="AppBar"
-      title="Cool App Name"
+      title={<Navtabs />}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
