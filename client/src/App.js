@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {lightBlue500, orange500} from 'material-ui/styles/colors';
+import {lightBlue500, orange500, grey900} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Navbar from './components/Nav';
 import { withUser, update } from './services/withUser';
@@ -11,6 +11,7 @@ import CreateAccountPage from './pages/CreateAccountPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
+import HelpPage from './pages/HelpPage';
 
 class App extends Component {
 
@@ -52,6 +53,7 @@ class App extends Component {
               <Route exact path="/" component={HomePage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/create" component={CreateAccountPage} />
+              <Route exact path="/help" component={HelpPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </Fragment>
