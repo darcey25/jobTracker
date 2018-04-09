@@ -2,22 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
-import  Sidedrawer from './Sidedrawer';
-import Navtabs from './Navtabs';
-import LoginButton from './LoginButton';
-import LoginMenu from './LoginMenu';
-import {Tabs, Tab} from 'material-ui'
+import  Sidedrawer from '../Sidedrawer';
+import LoginButton from '../LoginButton';
+import LoginMenu from '../LoginMenu';
+import Navtabs from '../Navtabs';
 
-import { update } from '../services/withUser';
-
-const styles = {
-  nav: {
-    height: 200,
-  },
-  title: {
-    overflow: "visible",
-  }
-};
+import { update } from '../../services/withUser';
 
 const Navbar = (props) => {
   const { user } = props;
@@ -38,9 +28,16 @@ const Navbar = (props) => {
   }
   return (
     <div>
-
-    <AppBar style={styles.nav}
-      titleStyle= {styles.title}
+    <AppBar
+      style={{
+        fontFamily: 'Lobster, cursive',
+        color: 'white',
+        height: 112,
+      }}
+      titleStyle = {{
+        height: "auto",
+      }}
+      className="AppBar"
       title={<Navtabs />}
       showMenuIconButton={true}
       iconElementLeft={
@@ -49,10 +46,8 @@ const Navbar = (props) => {
       iconElementRight={user ?
         <LoginMenu username={username} onLogOut={handleLogOut} />
         : <LoginButton onClick={handleLogIn} />}
-    >
-
+        >
     </AppBar>
-
     </div>
 
   )
