@@ -3,10 +3,21 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import  Sidedrawer from './Sidedrawer';
+import Navtabs from './Navtabs';
 import LoginButton from './LoginButton';
 import LoginMenu from './LoginMenu';
+import {Tabs, Tab} from 'material-ui'
 
 import { update } from '../services/withUser';
+
+const styles = {
+  nav: {
+    height: 200,
+  },
+  title: {
+    overflow: "visible",
+  }
+};
 
 const Navbar = (props) => {
   const { user } = props;
@@ -28,9 +39,9 @@ const Navbar = (props) => {
   return (
     <div>
 
-    <AppBar
-
-      title="Cool App Name"
+    <AppBar style={styles.nav}
+      titleStyle= {styles.title}
+      title={<Navtabs />}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
@@ -39,8 +50,9 @@ const Navbar = (props) => {
         <LoginMenu username={username} onLogOut={handleLogOut} />
         : <LoginButton onClick={handleLogIn} />}
     >
-  
+ 
     </AppBar>
+
     </div>
 
   )
