@@ -50,7 +50,7 @@ const Navbar = (props) => {
         <LoginMenu username={username} onLogOut={handleLogOut} />
         : <LoginButton onClick={handleLogIn} />}
     >
- 
+
     </AppBar>
 
     </div>

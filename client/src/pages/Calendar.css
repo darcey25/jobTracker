@@ -1,0 +1,30 @@
+.Calendar{
+  height: 90vh;
+  width: 80%;
+  margin: 10px auto;
+  font-family: 'Lato', sans-serif;
+}
+
+.rbc-toolbar{
+      flex-wrap: wrap;
+}
+
+.rbc-btn-group{
+  margin-bottom: 5px;
+}
+
+.rbc-event-content, .rbc-event{
+  background-color: rgb(255, 152, 0);
+}
+
+.rbc-toolbar-label{
+  font-family: 'Lobster', cursive;
+  font-size: 28px;
+}
+
+@media only screen and (max-width:510px) {
+  .rbc-toolbar-label{
+    font-size: 20px;
+  }
+
+}
