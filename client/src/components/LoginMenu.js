@@ -14,6 +14,7 @@ const LoginMenu = (props) => {
       }
       targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+      iconStyle={{ color: "white"}}
     >
       <MenuItem primaryText={username} />
       <MenuItem

@@ -38,7 +38,7 @@ export default class DrawerUndockedExample extends React.Component {
           }}
           >Cool App Name</h1>
           <MenuItem onClick={this.handleClose} href="/">Jobs</MenuItem>
-          <MenuItem onClick={this.handleClose}>Calender</MenuItem>
+          <MenuItem onClick={this.handleClose} href="/calendar">Calender</MenuItem>
           <MenuItem onClick={this.handleClose}>Map</MenuItem>
           <MenuItem onClick={this.handleClose} href="/help">Help</MenuItem>
         </Drawer>
