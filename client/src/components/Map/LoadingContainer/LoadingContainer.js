@@ -1,7 +1,11 @@
+import React, { Component } from 'react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import MapContainer from "../MapContainer";
+
 const LoadingContainer = (props) => (
-  <div>Fancy loading container!</div>
+  <div>Loading...</div>
 )
 export default GoogleApiWrapper({
-  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE),
+  apiKey: ('AIzaSyBAQEBzkSGDkjSM4p4EukoAdsqQW-k_WVA'),
   LoadingContainer: LoadingContainer
 })(MapContainer)

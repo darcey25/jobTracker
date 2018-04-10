@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { withUser } from '../services/withUser';
 import MapContainer from '../components/Map/MapContainer';
+import LoadingContainer from '../components/Map/LoadingContainer';
 
 class MapPage extends Component {
   state = {
@@ -31,6 +32,18 @@ class MapPage extends Component {
   render() {
     const { user } = this.props; // get the user prop from props
     const { stuff } = this.state; // get stuff from state
+
+    if (!this.props.loaded) {
+      return (
+        <Fragment>
+          {user &&
+            <div>
+              <LoadingContainer />
+            </div>
+          }
+        </Fragment>
+      );
+    }
 
     return (
       <Fragment>
