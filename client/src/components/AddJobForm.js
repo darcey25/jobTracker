@@ -32,12 +32,3 @@ const AddJobFrom = props => (
 
 export default AddJobFrom;
 
-    //   <div className="pull-right">
-    //   <button
-    //     onClick={props.handleFormSubmit}
-    //     type="submit"
-    //     className="submit"
-    //   >
-    //     Submit
-    //   </button>
-    // </div>

@@ -59,7 +59,6 @@ class HomePage extends Component {
     );
   }
 }
-
 // withUser function will wrap the specified component in another component that will
 // inject the currently logged in user as a prop called "user"
 export default withUser(HomePage);
