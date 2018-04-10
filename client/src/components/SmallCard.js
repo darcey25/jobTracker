@@ -1,7 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
+const loadCards = () => {
+  axios.get('/api/newjob').then(function(data){
+    console.log(data);
+  })
+}
+loadCards();
 const SmallCard = () => (
   <Card
   className="jobCard">
