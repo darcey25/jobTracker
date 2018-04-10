@@ -17,9 +17,9 @@ class AddCard extends Component {
 
 render() {
 	return (
-<div>
-<AddCardModal/>
-  </div>
+    <div>
+      <AddCardModal/>
+    </div>
   )
 }
 
