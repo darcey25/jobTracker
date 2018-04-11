@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
-const loadCards = () => {
+
+class SmallCard extends Component{
+  state = ""
+
+componentDidMount() {
+  this.loadCards();
+}
+
+loadCards = () => {
   axios.get('/api/newjob').then(function(data){
     console.log(data);
   })
 }
-loadCards();
-const SmallCard = () => (
+
+
+render(){
+  return(
   <Card
   className="jobCard">
     <CardHeader
@@ -29,6 +39,8 @@ const SmallCard = () => (
       Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
     </CardText>
   </Card>
-);
 
+    )
+}
+}
 export default SmallCard;
