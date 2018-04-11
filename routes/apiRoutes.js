@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const db = require('../models');
+// const jobController = require("../controller/jobController");
 const mustBeLoggedIn = require('../shared/middleware/mustBeLoggedIn');
 
 function getCurrentUser(req, res) {
@@ -81,6 +82,27 @@ router.route('/stuff')
     ]);
   });
 
+router.route('/newjob')
+  .post((req, res) =>{
+    db.NewJob.create(req.body)
+    .then(dbNewJob =>{
+      res.json(dbNewJob);
+    })
+    .catch(err => res.status(422).json(err));
+  });
+
+  router.route('/newjob')
+  .get((req, res)=>{
+    db.NewJob.find()
+    .then(dbNewJob=>{
+      res.json(dbNewJob);
+    })
+    .catch(err=> res.status(422).json(err));
+        console.log(res);
+
+  });
+// router.route('/newjob')
+//   .post(jobController.create);
 
 // router.route('/userInfo')
 //   .get(req, res => {
@@ -89,5 +111,6 @@ router.route('/stuff')
 //       .then(
 //         res.json();)
 //   });
+
 
 module.exports = router;

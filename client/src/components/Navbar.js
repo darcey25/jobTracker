@@ -38,7 +38,7 @@ const Navbar = (props) => {
   }
   return (
     <div>
-
+    <Route path="/home" render={() => <div>Home</div>}/>
     <AppBar style={styles.nav}
       titleStyle= {styles.title}
       title={<Navtabs />}
