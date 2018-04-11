@@ -8,6 +8,7 @@ import LoginMenu from '../LoginMenu';
 import Navtabs from '../Navtabs';
 
 import { update } from '../../services/withUser';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Navbar = (props) => {
   const { user } = props;
@@ -27,8 +28,10 @@ const Navbar = (props) => {
       });
   }
   return (
+    <Router>
     <div>
-    <AppBar
+    <Switch>
+    <Route exact path="(/|/map)"  render={() => <AppBar
       style={{
         fontFamily: 'Lobster, cursive',
         color: 'white',
@@ -38,7 +41,7 @@ const Navbar = (props) => {
         height: "auto",
       }}
       className="AppBar"
-      title={<Navtabs />}
+      title={user ? <Navtabs /> : "Cool App Name"}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
@@ -47,8 +50,30 @@ const Navbar = (props) => {
         <LoginMenu username={username} onLogOut={handleLogOut} />
         : <LoginButton onClick={handleLogIn} />}
         >
-    </AppBar>
+    </AppBar>}/>
+    <Route exact path="(/login|/create|/help|/calendar)" render={() => <AppBar
+      style={{
+        fontFamily: 'Lobster, cursive',
+        color: 'white',
+      }}
+      titleStyle = {{
+        height: "auto",
+      }}
+      className="AppBar"
+      title="Cool App Name"
+      showMenuIconButton={true}
+      iconElementLeft={
+        <Sidedrawer/>
+      }
+      iconElementRight={user ?
+        <LoginMenu username={username} onLogOut={handleLogOut} />
+        : <LoginButton onClick={handleLogIn} />}
+        >
+    </AppBar>}/>
+    </Switch>
+    
     </div>
+    </Router>
 
   )
 };
