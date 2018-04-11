@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {lightBlue500, orange500} from 'material-ui/styles/colors';
+import {lightBlue500, orange500, indigo500, teal500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Navbar from './components/Nav';
 import { withUser, update } from './services/withUser';
