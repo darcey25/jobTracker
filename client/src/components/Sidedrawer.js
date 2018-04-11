@@ -4,6 +4,7 @@ import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
 import {white} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
+import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 
 
 export default class DrawerUndockedExample extends React.Component {
@@ -16,6 +17,11 @@ export default class DrawerUndockedExample extends React.Component {
   handleToggle = () => this.setState({open: !this.state.open});
 
   handleClose = () => this.setState({open: false});
+
+  colorChange = (x,y) =>{
+    console.log(x +y);
+
+  };
 
   render() {
     return (
@@ -40,6 +46,24 @@ export default class DrawerUndockedExample extends React.Component {
           <MenuItem onClick={this.handleClose} href="/">Jobs</MenuItem>
           <MenuItem onClick={this.handleClose} href="/calendar">Calendar</MenuItem>
           <MenuItem onClick={this.handleClose} href="/map">Map</MenuItem>
+          <MenuItem
+            primaryText="Color Theme"
+            rightIcon={<ArrowDropRight />}
+          menuItems={[
+            <MenuItem primaryText="Blue/Orange"
+            onClick={() => this.colorChange("lightBlue500","orange500")}
+               />,
+            <MenuItem primaryText="Teal/Indigo"
+            onClick={() => this.colorChange("teal500","indigo500")}
+               />,
+            <MenuItem primaryText="Indigo/Pink"
+            onClick={() => this.colorChange("indigo500","pink500")}
+           />,
+            <MenuItem primaryText="Grey/Orange"
+            onClick={() => this.colorChange("blueGrey500","orange500")}
+            />,
+          ]}
+          />
           <MenuItem onClick={this.handleClose} href="/help">Help</MenuItem>
         </Drawer>
       </div>

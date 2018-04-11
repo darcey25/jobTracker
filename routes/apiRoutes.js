@@ -17,6 +17,7 @@ function getCurrentUser(req, res) {
 router.route('/auth')
   // GET to /api/auth will return current logged in user info
   .get((req, res) => {
+    console.log(req.body)
     if (!req.user) {
       return res.status(401).json({
         message: 'You are not currently logged in.'
@@ -81,5 +82,12 @@ router.route('/stuff')
   });
 
 
-module.exports = router;
+// router.route('/userInfo')
+//   .get(req, res => {
+//     console.log("coucou " +req.user._id)
+//     db.User.find({_id: req.user._id})
+//       .then(
+//         res.json();)
+//   });
 
+module.exports = router;

@@ -34,11 +34,16 @@ class App extends Component {
           update(null);
         }
       });
+
+
+      axios.get('/api/userInfo')
+        .then(res => {
+          console.log(res)
+        })
   }
 
   render() {
     const { user } = this.props;
-
     const muiTheme = getMuiTheme({
     palette: {
       primary1Color: lightBlue500,
