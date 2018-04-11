@@ -13,8 +13,8 @@
   margin-bottom: 5px;
 }
 
-.rbc-event-content, .rbc-event{
-  background-color: rgb(255, 152, 0);
+.rbc-event-content, .rbc-event, .rbc-event.rbc-selected{
+  background-color: #5D6D7E;
 }
 
 .rbc-toolbar-label{
