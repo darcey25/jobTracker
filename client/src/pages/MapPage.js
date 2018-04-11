@@ -9,17 +9,23 @@ class MapPage extends Component {
     stuff: null,
     locations: []
   }
+
   componentDidMount() {
     // only try loading stuff if the user is logged in.
     if (!this.props.user) {
+      console.log("No user detected");
+      console.log(this.props);
+      console.log(this.props.user);
       return;
     }
-
+    
     axios.get('/api/stuff')
       .then(res => {
         this.setState({
           stuff: res.data
         });
+        console.log(this.state.stuff);
+        console.log("Something");
       })
       .catch(err => {
         // if we got an error, we'll just log it and set stuff to an empty array
@@ -29,7 +35,9 @@ class MapPage extends Component {
         });
       });
   }
+
   render() {
+
     const { user } = this.props; // get the user prop from props
     const { stuff } = this.state; // get stuff from state
 
@@ -41,20 +49,15 @@ class MapPage extends Component {
               <LoadingContainer />
             </div>
           }
+          {!user &&
+            <div>Hey! I don't recognize you! Register and log in using the link above</div>
+          }
         </Fragment>
       );
     }
 
-    return (
-      <Fragment>
-        {user &&
-          <div>
-            <MapContainer />
-          </div>
-        }
-      </Fragment>
-    );
   }
+
 }
 
 // withUser function will wrap the specified component in another component that will

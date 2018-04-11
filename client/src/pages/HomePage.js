@@ -12,14 +12,20 @@ class HomePage extends Component {
   componentDidMount() {
     // only try loading stuff if the user is logged in.
     if (!this.props.user) {
+      console.log(this.props);
+      console.log(this.props.user);
       return;
     }
+
+    console.log(this.props);
 
     axios.get('/api/stuff')
       .then(res => {
         this.setState({
           stuff: res.data
         });
+        console.log(this.state.stuff);
+        console.log("Something");
       })
       .catch(err => {
         // if we got an error, we'll just log it and set stuff to an empty array
@@ -47,7 +53,7 @@ class HomePage extends Component {
           </div>
         }
         {user && !stuff &&
-           
+
           <div>
             <AddCard/>
           </div>

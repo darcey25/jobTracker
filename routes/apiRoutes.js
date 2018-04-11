@@ -76,10 +76,9 @@ router.route('/stuff')
   .get(mustBeLoggedIn(), (req, res) => {
     // at this point we can assume the user is logged in. if not, the mustBeLoggedIn middleware would have caught it
     res.json([
-      'Add Job To Get Started'
+      'Cool - you are logged in'
     ]);
   });
 
 
 module.exports = router;
-
