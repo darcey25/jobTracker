@@ -9,9 +9,9 @@ function getCurrentUser(req, res) {
   // I'm picking only the specific fields its OK for the audience to see publicly
   // never send the whole user object in the response, and only show things it's OK
   // for others to read (like ID, name, email address, etc.)
-  const { id, username } = req.user;
+  const { id, username, primaryColor, accentColor } = req.user;
   res.json({
-    id, username
+    id, username, primaryColor, accentColor
   });
 }
 
@@ -98,19 +98,12 @@ router.route('/newjob')
       res.json(dbNewJob);
     })
     .catch(err=> res.status(422).json(err));
-        console.log(res);
+        // console.log(res);
 
   });
 // router.route('/newjob')
 //   .post(jobController.create);
-
-// router.route('/userInfo')
-//   .get(req, res => {
-//     console.log("coucou " +req.user._id)
-//     db.User.find({_id: req.user._id})
-//       .then(
-//         res.json();)
-//   });
+//
 
 
 module.exports = router;

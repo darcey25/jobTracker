@@ -22,6 +22,16 @@ const UserSchema = new Schema({
   },
   password: {
     type: String
+  },
+  primaryColor: {
+    type: String,
+    required: true,
+    default: "lightBlue500"
+  },
+  accentColor: {
+    type: String,
+    required: true,
+    default: "orange500"
   }
 });
 

@@ -46,7 +46,7 @@ export default class DrawerUndockedExample extends React.Component {
           <MenuItem onClick={this.handleClose} href="/">Jobs</MenuItem>
           <MenuItem onClick={this.handleClose} href="/calendar">Calendar</MenuItem>
           <MenuItem onClick={this.handleClose} href="/map">Map</MenuItem>
-          <MenuItem
+          {/* <MenuItem
             primaryText="Color Theme"
             rightIcon={<ArrowDropRight />}
           menuItems={[
@@ -63,7 +63,7 @@ export default class DrawerUndockedExample extends React.Component {
             onClick={() => this.colorChange("blueGrey500","orange500")}
             />,
           ]}
-          />
+          /> */}
           <MenuItem onClick={this.handleClose} href="/help">Help</MenuItem>
         </Drawer>
       </div>
