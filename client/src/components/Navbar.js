@@ -49,7 +49,9 @@ const Navbar = (props) => {
       iconElementRight={user ?
         <LoginMenu username={username} onLogOut={handleLogOut} />
         : <LoginButton onClick={handleLogIn} />}
-    ></AppBar>
+    >
+
+    </AppBar>
 
     </div>
 
