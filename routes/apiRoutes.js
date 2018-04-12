@@ -9,15 +9,16 @@ function getCurrentUser(req, res) {
   // I'm picking only the specific fields its OK for the audience to see publicly
   // never send the whole user object in the response, and only show things it's OK
   // for others to read (like ID, name, email address, etc.)
-  const { id, username } = req.user;
+  const { id, username, primaryColor, accentColor } = req.user;
   res.json({
-    id, username
+    id, username, primaryColor, accentColor
   });
 }
 
 router.route('/auth')
   // GET to /api/auth will return current logged in user info
   .get((req, res) => {
+    console.log(req.body)
     if (!req.user) {
       return res.status(401).json({
         message: 'You are not currently logged in.'
@@ -97,10 +98,11 @@ router.route('/newjob')
       res.json(dbNewJob);
     })
     .catch(err=> res.status(422).json(err));
-        console.log(res);
+        // console.log(res);
 
   });
 // router.route('/newjob')
 //   .post(jobController.create);
+//
 
 module.exports = router;
