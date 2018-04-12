@@ -5,6 +5,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
+import TextField from 'material-ui/TextField';
 import {orange500} from 'material-ui/styles/colors';
 import './style.css'
 // import API from '../utils/API';
@@ -53,55 +54,69 @@ handleFormSubmit = (event) => {
       <div>
         <RaisedButton
         className = "addJob"
-        label="Add Job" 
+        label="Add Job"
         labelPosition="before"
-        onClick={this.handleOpen} 
-        primary={true}
-        >
-        <FontIcon className="material-icons" color={orange500}>add</FontIcon>
-        </RaisedButton>
+        onClick={this.handleOpen}
+        secondary={true}
+        // icon={<FontIcon className="material-icons plusBtn">add</FontIcon>}
+      />
         <Dialog
-          title="Dialog With Actions"
+          title="Add a new job"
+          contentStyle={{
+            maxWidth: 500,
+          }}
+          titleStyle={{
+            fontFamily: 'Lobster, cursive',
+          }}
           // actions={actions}
           modal={true}
           open={this.state.open}>
             <form onClick = {this.handleFormSubmit}>
             <div className="form-group">
-              <h4>
-                <strong>Add Company Name</strong>
-              </h4>
-              <input
-                className="form-control"
-                type="text"
-                value={this.state.companyName}
-                name="companyName"
-                onChange={this.handleInputChange}
-                required
-              />
-              <h4>
-                <strong>Add Job Title</strong>
-              </h4>
-              <input
-                className="form-control"
-                type="text"
-                value={this.state.jobTitle}
-                name="jobTitle"
-                onChange={this.handleInputChange}
-                required
-              />
+                  <TextField
+                    hintText="REQUIRED: name of the company"
+                    floatingLabelText="Company Name"
+                    className="form-control"
+                    type="text"
+                    value={this.state.companyName}
+                    name="companyName"
+                    onChange={this.handleInputChange}
+                    required
+                    fullWidth={true}
+                  />
+                <br />
+                  <TextField
+                    hintText="REQUIRED: name of the position"
+                    floatingLabelText="Position"
+                    className="form-control"
+                    type="text"
+                    value={this.state.jobTitle}
+                    name="jobTitle"
+                    onChange={this.handleInputChange}
+                    required
+                    fullWidth={true}
+                  />
+                <br />
               </div>
+              <br />
               <div>
               <FlatButton
                 label="Cancel"
-                primary={true}
+                secondary={true}
                 onClick={this.handleClose}
+                style={{
+                  float: 'right'
+                }}
               />
               <FlatButton
                 label="Submit"
-                primary={true}
+                secondary={true}
                 onClick={this.handleClose}
                 type="submit"
                 className="submit"
+                style={{
+                  float: 'right'
+                }}
               />
             </div>
           </form>
@@ -112,4 +127,3 @@ handleFormSubmit = (event) => {
 }
 
 export default AddCardModal;
-
