@@ -3,13 +3,15 @@ import axios from 'axios';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
-
+import Dialog from 'material-ui/Dialog';
+import CardExpand from './CardExpand'
 
 
 
 class SmallCard extends Component{
   state = {
-    cardData: []
+    cardData: [],
+    open: false,
   };
 
 componentDidMount() {
@@ -30,7 +32,30 @@ deleteJob = id => {
   
 }
 
+handleOpen = () => {
+    this.setState({open: true});
+};
+
+handleClose = () => {
+    this.setState({open: false});
+};
+
+
+
 render(){
+  const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />,
+  ];
   return(
   <div>
     {this.state.cardData.map((item, index)=>{
@@ -45,10 +70,10 @@ render(){
               id={item._id}
             />
             <CardActions>
+              <FlatButton label="Expand" onClick={this.handleOpen} />
               <FlatButton 
               id={item._id}
               onClick={() => this.deleteJob(item._id)}>
-
                 <FontIcon className="material-icons">delete</FontIcon>
               </FlatButton>
             </CardActions>
@@ -58,6 +83,16 @@ render(){
               Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
               Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
             </CardText>
+            <div>
+              <Dialog
+                bodyStyle={{overflow: "auto"}}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+              >
+                <CardExpand />
+              </Dialog>
+            </div>
           </Card>
           );
         })}
