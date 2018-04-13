@@ -6,6 +6,10 @@ import "./LoadingContainer.css";
 
 const LoadingContainer = (props) => (
   <div className="progressBar">
+    <h2>
+      <i class="material-icons">location_on</i><br />
+      Map loading...
+    </h2>
     <LinearProgress mode="indeterminate" />
   </div>
 )
