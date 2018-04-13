@@ -2,9 +2,8 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import { withUser } from '../services/withUser';
-import AddCard from '../components/AddCard';
 import SmallCard from '../components/SmallCard';
-
+import AddCardModal from '../components/AddCardModal';
 class HomePage extends Component {
   state = {
     stuff: null
@@ -49,14 +48,8 @@ class HomePage extends Component {
            {stuff.map((s, i) => <ListItem key={i} primaryText={s} />)}
           </List>
           <SmallCard/>
-          <AddCard/>
-          </div>
-        }
-        {user && !stuff &&
-
-          <div>
-            <AddCard/>
-          </div>
+          <AddCardModal/>
+        </div>
         }
         {!user &&
           <div>Hey! I don't recognize you! Register and log in using the link above</div>
@@ -68,4 +61,3 @@ class HomePage extends Component {
 // withUser function will wrap the specified component in another component that will
 // inject the currently logged in user as a prop called "user"
 export default withUser(HomePage);
-
