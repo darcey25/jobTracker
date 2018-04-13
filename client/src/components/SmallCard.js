@@ -3,7 +3,6 @@ import axios from 'axios';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
-import {red500, red400, pink500, pink400, purple500, purple400, deepPurple500, deepPurple400, blue500, blue400, orange500, orange400, cyan500, cyan400, teal500, teal400, lightBlue500, lightBlue400, amber500, amber400, deepOrange500, deepOrange400, indigo500, indigo400, green500, green400, blueGrey500, blueGrey400} from 'material-ui/styles/colors';
 import './style.css'
 import Dialog from 'material-ui/Dialog';
 import CardExpand from './CardExpand'
@@ -14,9 +13,6 @@ import CardExpand from './CardExpand'
 class SmallCard extends Component{
   state = {
     cardData: [],
-    colorArray: [
-      {red500, red400},{pink500, pink400},{purple500, purple400},{deepPurple500, deepPurple400},{blue500, blue400},{orange500, orange400},{cyan500, cyan400},{teal500, teal400}, {lightBlue500, lightBlue400},{amber500, amber400}, {deepOrange500, deepOrange400}, {indigo500, indigo400}, {green500, green400}, {blueGrey500, blueGrey400}
-    ],
     open: false,
   };
 
@@ -70,26 +66,22 @@ render(){
     }}
     >
     {this.state.cardData.map((item, index)=>{
-      let randomColor = this.state.colorArray[Math.floor(Math.random() * this.state.colorArray.length)];
-      let thisRandomColor = Object.values(randomColor)
-      console.log(thisRandomColor)
+
       return(
         <Card key={index}
           className="jobCard"
           style={{
             margin: "8px",
-            backgroundColor: thisRandomColor[0]
+            backgroundColor: item.cardColor
           }}
           onClick={this.handleOpen}
           >
             <CardHeader
               title={item.companyName}
               subtitle={item.jobTitle}
-              // actAsExpander={true}
-              // showExpandableButton={true}
               id={item._id}
               style={{
-                backgroundColor: thisRandomColor[1],
+                backgroundColor: item.titleColor,
                 paddingRight: "10px",
                 minHeight: "81px"
               }}
@@ -105,23 +97,23 @@ render(){
 
               style={{
                 height: "36px",
+                textAlign:"right"
               }}
 
               >
               <FlatButton
               id={item._id}
               onClick={() => this.deleteJob(item._id)}>
-                <FontIcon className="material-icons">delete</FontIcon>
-              </FlatButton>
-              
-            </CardActions>
-            {/* <CardText expandable={true}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+                <FontIcon
+                  style={{
+                    color: "#fff",
+                    float: "right"
+                  }}
+                  className="material-icons">delete</FontIcon>
 
-            </CardText> */}
+              </FlatButton>
+
+            </CardActions>
             <div>
               <Dialog
                 bodyStyle={{overflow: "auto"}}
@@ -140,5 +132,3 @@ render(){
 }
 }
 export default SmallCard;
-
-// <IconButton iconClassName="muidocs-icon-action-delete" />
