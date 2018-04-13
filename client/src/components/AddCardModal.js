@@ -56,6 +56,14 @@ handleFormSubmit = (event) => {
         labelPosition="before"
         onClick={this.handleOpen}
         secondary={true}
+        style = {{
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+}}
         // icon={<FontIcon className="material-icons plusBtn">add</FontIcon>}
       />
         <Dialog
