@@ -100,6 +100,16 @@ router.route('/newjob')
         console.log(res);
 
   });
+
+  router.route('/newjob/:id')
+
+  .delete((req, res)=>{
+    console.log("test");
+    db.NewJob.findById({ _id: req.params.id })
+    .then(dbNewJob => dbNewJob.remove())
+    .then(dbNewJob=> res.json(dbNewJob))
+    .catch(err=> res.status(422).json(err));
+  });
 // router.route('/newjob')
 //   .post(jobController.create);
 
