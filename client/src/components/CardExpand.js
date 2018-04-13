@@ -13,6 +13,7 @@ import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import Download from 'material-ui/svg-icons/file/file-download';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
+// import SmallCard from './SmallCard';
 
 
 
@@ -44,7 +45,7 @@ class CardExpand extends Component {
     };
     return (
       <div>
-        <h1>Google - Developer </h1>
+        <h1>{this.props.title} </h1>
         <Divider />
         <div className="main">
         <Paper style={style.paperMenu}>

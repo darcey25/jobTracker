@@ -28,6 +28,7 @@ class HomePage extends Component {
 
           <SmallCard/>
           <AddCardModal/>
+          </div>
         }
         
         {!user &&

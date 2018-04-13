@@ -6,7 +6,7 @@ import FontIcon from 'material-ui/FontIcon';
 import {red500, red400, pink500, pink400, purple500, purple400, deepPurple500, deepPurple400, blue500, blue400, orange500, orange400, cyan500, cyan400, teal500, teal400, lightBlue500, lightBlue400, amber500, amber400, deepOrange500, deepOrange400, indigo500, indigo400, green500, green400, blueGrey500, blueGrey400} from 'material-ui/styles/colors';
 import './style.css'
 import Dialog from 'material-ui/Dialog';
-import CardExpand from './CardExpand'
+import CardExpand from './CardExpand';
 
 
 
@@ -18,7 +18,7 @@ class SmallCard extends Component{
       {red500, red400},{pink500, pink400},{purple500, purple400},{deepPurple500, deepPurple400},{blue500, blue400},{orange500, orange400},{cyan500, cyan400},{teal500, teal400}, {lightBlue500, lightBlue400},{amber500, amber400}, {deepOrange500, deepOrange400}, {indigo500, indigo400}, {green500, green400}, {blueGrey500, blueGrey400}
     ],
     open: false,
-  };
+  }
 
 componentDidMount() {
   this.loadCards();
@@ -28,7 +28,7 @@ loadCards = () => {
   axios.get('/api/newjob').then(res=>
     this.setState({cardData: res.data})
     )
-};
+}
 
 deleteJob = id => {
   axios.delete('/api/newjob/' + id)
@@ -39,27 +39,14 @@ deleteJob = id => {
 
 handleOpen = () => {
     this.setState({open: true});
-};
+}
 
 handleClose = () => {
     this.setState({open: false});
-};
+}
 
 
 render(){
-  const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onClick={this.handleClose}
-      />,
-  ];
   return(
   <div
     style={{
@@ -74,12 +61,11 @@ render(){
       return(
         <Card key={index}
           className="jobCard"
+          onClick={this.handleOpen}
           style={{
             margin: "8px",
             backgroundColor: thisRandomColor[0]
-          }}
-          onClick={this.handleOpen}
-          >
+          }}>
             <CardHeader
               title={item.companyName}
               subtitle={item.jobTitle}
@@ -113,16 +99,9 @@ render(){
               </FlatButton>
               
             </CardActions>
-            {/* <CardText expandable={true}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
 
-            </CardText> */}
             <div>
               <Dialog
-                bodyStyle={{overflow: "auto"}}
                 modal={false}
                 open={this.state.open}
                 onRequestClose={this.handleClose}
