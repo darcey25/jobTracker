@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
-import {orange500} from 'material-ui/styles/colors';
+import {red500, red400, pink500, pink400, purple500, purple400, deepPurple500, deepPurple400, blue500, blue400, orange500, orange400, cyan500, cyan400, teal500, teal400, lightBlue500, lightBlue400, amber500, amber400, deepOrange500, deepOrange400, indigo500, indigo400, green500, green400, blueGrey500, blueGrey400} from 'material-ui/styles/colors';
 import './style.css'
 // import API from '../utils/API';
 
@@ -14,12 +14,20 @@ class AddCardModal extends Component {
   state = {
     companyName: "",
     jobTitle: "",
-    open: false
+    open: false,
+    colorArray: [
+      {red500, red400},{pink500, pink400},{purple500, purple400},{deepPurple500, deepPurple400},{blue500, blue400},{orange500, orange400},{cyan500, cyan400},{teal500, teal400}, {lightBlue500, lightBlue400},{amber500, amber400}, {deepOrange500, deepOrange400}, {indigo500, indigo400}, {green500, green400}, {blueGrey500, blueGrey400}
+    ]
   }
 
 
   handleOpen = () => {
     this.setState({open: true});
+    let randomColor = this.state.colorArray[Math.floor(Math.random() * this.state.colorArray.length)];
+    let thisRandomColor = Object.values(randomColor)
+    console.log(randomColor)
+    this.state.cardColor = thisRandomColor[0];
+    this.state.titleColor = thisRandomColor[1];
   }
 
   handleClose = () => {
@@ -33,8 +41,12 @@ class AddCardModal extends Component {
     });
   }
 
+
 handleFormSubmit = (event) => {
   event.preventDefault();
+
+  const cardColor = this.state.cardColor;
+  const titleColor = this.state.titleColor;
   const companyName = this.state.companyName;
   const jobTitle = this.state.jobTitle;
   console.log(companyName);
@@ -42,7 +54,9 @@ handleFormSubmit = (event) => {
   if (this.state.companyName && this.state.jobTitle){
     axios.post('/api/newjob', {
       companyName,
-      jobTitle
+      jobTitle,
+      cardColor,
+      titleColor
     })
     .then(res=> window.location.reload())
     .catch(err=> console.log(err));
@@ -59,13 +73,14 @@ handleFormSubmit = (event) => {
         onClick={this.handleOpen}
         secondary={true}
         style = {{
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-}}
+            margin: 0,
+            top: 'auto',
+            right: 20,
+            bottom: 20,
+            left: 'auto',
+            position: 'fixed',
+            zIndex: 999
+        }}
         // icon={<FontIcon className="material-icons plusBtn">add</FontIcon>}
       />
         <Dialog
