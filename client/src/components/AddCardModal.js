@@ -4,9 +4,7 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
-import {orange500} from 'material-ui/styles/colors';
 import './style.css'
 // import API from '../utils/API';
 

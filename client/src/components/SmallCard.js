@@ -3,6 +3,8 @@ import axios from 'axios';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
+import './style.css'
+import {blue500, blue900, red500, greenA200} from 'material-ui/styles/colors';
 
 
 
@@ -10,6 +12,7 @@ import FontIcon from 'material-ui/FontIcon';
 class SmallCard extends Component{
   state = {
     cardData: []
+
   };
 
 componentDidMount() {
@@ -27,22 +30,31 @@ deleteJob = id => {
   .then(res=>
   this.loadCards())
   .catch(err => console.log(err));
-  
 }
+
 
 render(){
   return(
-  <div>
+  <div
+  style = {{
+    display: "flex",
+    flexWrap: "wrap"}}>
     {this.state.cardData.map((item, index)=>{
       return(
         <Card key={index}
-          className="jobCard">
+          className="jobCard"
+          style = {{
+            backgroundColor: blue500
+            }}>
             <CardHeader
               title={item.companyName}
               subtitle={item.jobTitle}
-              actAsExpander={true}
-              showExpandableButton={true}
+             
               id={item._id}
+              
+              style = {{
+                backgroundColor: blue900
+              }}
             />
             <CardActions>
               <FlatButton 
@@ -52,12 +64,7 @@ render(){
                 <FontIcon className="material-icons">delete</FontIcon>
               </FlatButton>
             </CardActions>
-            <CardText expandable={true}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-            </CardText>
+           
           </Card>
           );
         })}

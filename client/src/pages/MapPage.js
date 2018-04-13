@@ -18,28 +18,12 @@ class MapPage extends Component {
       console.log(this.props.user);
       return;
     }
-    
-    axios.get('/api/stuff')
-      .then(res => {
-        this.setState({
-          stuff: res.data
-        });
-        console.log(this.state.stuff);
-        console.log("Something");
-      })
-      .catch(err => {
-        // if we got an error, we'll just log it and set stuff to an empty array
-        console.log(err);
-        this.setState({
-          stuff: []
-        });
-      });
+
   }
 
   render() {
 
     const { user } = this.props; // get the user prop from props
-    const { stuff } = this.state; // get stuff from state
 
     if (!this.props.loaded) {
       return (
