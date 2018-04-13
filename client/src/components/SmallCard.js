@@ -80,6 +80,7 @@ render(){
             margin: "8px",
             backgroundColor: thisRandomColor[0]
           }}
+          onClick={this.handleOpen}
           >
             <CardHeader
               title={item.companyName}
@@ -112,7 +113,7 @@ render(){
               onClick={() => this.deleteJob(item._id)}>
                 <FontIcon className="material-icons">delete</FontIcon>
               </FlatButton>
-              <FlatButton label="Expand" onClick={this.handleOpen} />
+              
             </CardActions>
             {/* <CardText expandable={true}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
