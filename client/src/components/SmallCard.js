@@ -5,6 +5,8 @@ import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import {red500, red400, pink500, pink400, purple500, purple400, deepPurple500, deepPurple400, blue500, blue400, orange500, orange400, cyan500, cyan400, teal500, teal400, lightBlue500, lightBlue400, amber500, amber400, deepOrange500, deepOrange400, indigo500, indigo400, green500, green400, blueGrey500, blueGrey400} from 'material-ui/styles/colors';
 import './style.css'
+import Dialog from 'material-ui/Dialog';
+import CardExpand from './CardExpand'
 
 
 
@@ -14,7 +16,8 @@ class SmallCard extends Component{
     cardData: [],
     colorArray: [
       {red500, red400},{pink500, pink400},{purple500, purple400},{deepPurple500, deepPurple400},{blue500, blue400},{orange500, orange400},{cyan500, cyan400},{teal500, teal400}, {lightBlue500, lightBlue400},{amber500, amber400}, {deepOrange500, deepOrange400}, {indigo500, indigo400}, {green500, green400}, {blueGrey500, blueGrey400}
-    ]
+    ],
+    open: false,
   };
 
 componentDidMount() {
@@ -35,7 +38,30 @@ deleteJob = id => {
 
 }
 
+handleOpen = () => {
+    this.setState({open: true});
+};
+
+handleClose = () => {
+    this.setState({open: false});
+};
+
+
+
 render(){
+  const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />,
+  ];
   return(
   <div
     style={{
@@ -73,6 +99,7 @@ render(){
                 color: "#e0e0e0"
               }}
             />
+
             <CardActions
 
               style={{
@@ -83,16 +110,27 @@ render(){
               <FlatButton
               id={item._id}
               onClick={() => this.deleteJob(item._id)}>
-
                 <FontIcon className="material-icons">delete</FontIcon>
               </FlatButton>
+              <FlatButton label="Expand" onClick={this.handleOpen} />
             </CardActions>
             {/* <CardText expandable={true}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
               Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
               Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+
             </CardText> */}
+            <div>
+              <Dialog
+                bodyStyle={{overflow: "auto"}}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+              >
+                <CardExpand />
+              </Dialog>
+            </div>
           </Card>
           );
         })}
