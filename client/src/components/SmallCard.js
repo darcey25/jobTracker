@@ -4,6 +4,8 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import './style.css'
+import Dialog from 'material-ui/Dialog';
+import CardExpand from './CardExpand'
 
 
 
@@ -11,6 +13,7 @@ import './style.css'
 class SmallCard extends Component{
   state = {
     cardData: [],
+    open: false,
   };
 
 componentDidMount() {
@@ -31,7 +34,30 @@ deleteJob = id => {
 
 }
 
+handleOpen = () => {
+    this.setState({open: true});
+};
+
+handleClose = () => {
+    this.setState({open: false});
+};
+
+
+
 render(){
+  const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />,
+  ];
   return(
   <div
     style={{
@@ -40,7 +66,7 @@ render(){
     }}
     >
     {this.state.cardData.map((item, index)=>{
-      
+
       return(
         <Card key={index}
           className="jobCard"
@@ -48,6 +74,7 @@ render(){
             margin: "8px",
             backgroundColor: item.cardColor
           }}
+          onClick={this.handleOpen}
           >
             <CardHeader
               title={item.companyName}
@@ -65,6 +92,7 @@ render(){
                 color: "#e0e0e0"
               }}
             />
+
             <CardActions
 
               style={{
@@ -82,8 +110,20 @@ render(){
                     float: "right"
                   }}
                   className="material-icons">delete</FontIcon>
+
               </FlatButton>
+
             </CardActions>
+            <div>
+              <Dialog
+                bodyStyle={{overflow: "auto"}}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+              >
+                <CardExpand />
+              </Dialog>
+            </div>
           </Card>
           );
         })}
