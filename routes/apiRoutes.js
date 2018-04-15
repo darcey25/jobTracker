@@ -113,10 +113,11 @@ router.route('/newjob')
   });
 
 router.route('/newjob/:id')
-  .post((req, res)=>{
-    console.log(req)
-    db.NewJob.findById({ _id: req.params.id })
-    .then(dbNewJob =>dbNewJob.post())
+  .patch((req, res)=>{
+    console.log(req.body)
+    db.NewJob.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, data) {
+    res.json();
+  })
     .catch(err=> res.status(422).json(err));
   });
 // router.route('/newjob')

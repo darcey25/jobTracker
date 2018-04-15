@@ -33,7 +33,7 @@ class CardExpand extends Component {
   }
 
   UpdateInfo = id => {
-    axios.post('/api/newjob/' + id, {
+    axios.patch('/api/newjob/' + id, {
       info: this.state.info
     })
     .then(res=> res.json())
