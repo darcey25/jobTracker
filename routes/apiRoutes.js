@@ -111,6 +111,14 @@ router.route('/newjob')
     .then(dbNewJob=> res.json(dbNewJob))
     .catch(err=> res.status(422).json(err));
   });
+
+router.route('/newjob/:id')
+  .post((req, res)=>{
+    console.log(req)
+    db.NewJob.findById({ _id: req.params.id })
+    .then(dbNewJob =>dbNewJob.post())
+    .catch(err=> res.status(422).json(err));
+  });
 // router.route('/newjob')
 //   .post(jobController.create);
 //

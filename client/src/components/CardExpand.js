@@ -13,15 +13,35 @@ import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import Download from 'material-ui/svg-icons/file/file-download';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
-
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import axios from 'axios';
 
 
 class CardExpand extends Component {
-  
+  state = {
+    cardData: this.props.cardData,
+    info: this.props.cardData.info,
+    id: this.props.cardData._id
+  };
 
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  UpdateInfo = id => {
+    axios.post('/api/newjob/' + id, {
+      info: this.state.info
+    })
+    .then(res=> res.json())
+    .catch(err=> console.log(err));
+  }
 
   render() {
-    
+console.log(this.state)
     const style = {
       paperMenu: {
         display: 'inline-block',
@@ -44,11 +64,13 @@ class CardExpand extends Component {
     };
     return (
       <div>
-        <h1>Google - Developer </h1>
+        <h1>{this.state.cardData.companyName} - {this.state.cardData.jobTitle} </h1>
         <Divider />
         <div className="main">
         <Paper style={style.paperMenu}>
-          <Menu>
+          <Menu
+            disableAutoFocus={true}
+            >
             <MenuItem leftIcon={<Info />} />
             <MenuItem leftIcon={<SupervisorAccount />} />
             <MenuItem leftIcon={<Event />} />
@@ -56,8 +78,28 @@ class CardExpand extends Component {
           </Menu>
         </Paper>
         <Paper style={style.paperMain}>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet est ac nisi convallis scelerisque vel a arcu. Cras ultricies vel lectus commodo ultrices. Maecenas euismod pellentesque iaculis. Nulla bibendum, sapien id rhoncus bibendum, lorem massa cursus justo, id imperdiet arcu erat eu ante. Nulla egestas scelerisque nulla et convallis. Quisque consequat dignissim nibh eget finibus. Aliquam est mauris, ornare eu urna fermentum, iaculis pharetra leo.
-          </p>
+          <form>
+            <div className="form-group">
+              <TextField
+              id="text-field-controlled"
+              name="info"
+              value={this.state.info}
+              onChange={this.handleChange}
+              fullWidth={true}
+              multiLine={true}
+            />
+            <FlatButton
+              label="Submit"
+              onClick={() => this.UpdateInfo(this.state.id)}
+              secondary={true}
+              type="submit"
+              className="submit"
+              style={{
+                float: 'right'
+              }}
+            />
+            </div>
+          </form>
         </Paper>
         </div>
       </div>
