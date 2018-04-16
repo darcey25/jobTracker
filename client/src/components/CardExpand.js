@@ -2,57 +2,64 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import Info from 'material-ui/svg-icons/action/info';
-import SupervisorAccount from 'material-ui/svg-icons/action/supervisor-account';
-import Event from 'material-ui/svg-icons/action/event';
-import List from 'material-ui/svg-icons/action/list';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
-import ContentLink from 'material-ui/svg-icons/content/link';
 import Divider from 'material-ui/Divider';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import Download from 'material-ui/svg-icons/file/file-download';
-import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios';
+import Info from './Info';
+import Calendar from './Calendar';
+import Contacts from './Contacts';
+import Notes from './Notes';
+
 
 
 class CardExpand extends Component {
   state = {
-    info: "",
+
+    info: this.props.cardData.info,
     id: this.props.cardData._id,
     companyName: this.props.cardData.companyName,
     jobTitle: this.props.cardData.jobTitle,
+    pickedTab: null,
   };
 
   componentDidMount() {
-    this.loadCards();
+    this.setState({pickedTab: <Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>})
   }
 
-  loadCards = () => {
-    axios.get('/api/newjob/' + this.props.cardData._id).then(res=>
-      this.setState({info: res.data.info}))
+  // loadCards = () => {
+  //   axios.get('/api/newjob/' + this.props.cardData._id).then(res=>
+  //     this.setState({info: res.data.info}))
       // this.setState({info: res.data.info})
     // ).then(this.setState({info: this.state.cardData.info}))
+
+
+
+  // handleChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // }
+
+  handleClick = choice => {
+    this.setState({pickedTab:choice});
   };
 
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  }
 
-  UpdateInfo = id => {
-    axios.patch('/api/newjob/' + id, {
-      info: this.state.info
-    })
-    .then(res=> res.json())
-    .catch(err=> console.log(err));
-  }
+  // UpdateInfo = id => {
+  //   axios.patch('/api/newjob/' + id, {
+  //     info: this.state.info
+  //   })
+  //   .then(res=> res.json())
+  //   .catch(err=> console.log(err));
 
-  render() {
+  render(){
+
+
+    
+    let Active = this.state.pickedTab;
     const style = {
       paperMenu: {
         display: 'inline-block',
@@ -82,36 +89,20 @@ class CardExpand extends Component {
         <Divider />
         <div className="main">
         <Paper style={style.paperMenu}>
+
           <Menu
             disableAutoFocus={true}
             >
-            <MenuItem leftIcon={<Info />} />
-            <MenuItem leftIcon={<SupervisorAccount />} />
-            <MenuItem leftIcon={<Event />} />
-            <MenuItem leftIcon={<List />} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>)}>info</FontIcon>} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Contacts id={this.state.id}/>)}>supervisor_account</FontIcon>} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Calendar id={this.state.id}/>)}>event</FontIcon>} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Notes id={this.state.id}/>)}>list</FontIcon>} />
           </Menu>
         </Paper>
         <Paper style={style.paperMain}>
-          <form>
-            <div className="form-group">
-              <TextField
-              id="text-field-controlled"
-              name="info"
-              value={this.state.info}
-              onChange={this.handleChange}
-              fullWidth={true}
-              multiLine={true}
-            />
-            <FlatButton
-              label="Save"
-              onClick={() => this.UpdateInfo(this.state.id)}
-              secondary={true}
-              style={{
-                float: 'right'
-              }}
-            />
-            </div>
-          </form>
+          <div> 
+            {Active}
+          </div>
         </Paper>
         </div>
       </div>
