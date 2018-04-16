@@ -120,6 +120,16 @@ router.route('/newjob/:id')
   })
     .catch(err=> res.status(422).json(err));
   });
+
+  router.route('/newjob/:id')
+    .get((req, res)=>{
+      db.NewJob.findOne({ _id: req.params.id }, req.body, function (err, data) {
+        console.log(data);
+      res.json(data);
+    })
+      .catch(err=> res.status(422).json(err));
+    });
+
 // router.route('/newjob')
 //   .post(jobController.create);
 //
