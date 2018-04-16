@@ -110,8 +110,38 @@ router.route('/newjob')
     .then(dbNewJob=> res.json(dbNewJob))
     .catch(err=> res.status(422).json(err));
   });
+
+router.route('/newjob/:id')
+  .patch((req, res)=>{
+    console.log(req.body)
+    db.NewJob.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, data) {
+    res.json();
+  })
+    .catch(err=> res.status(422).json(err));
+  });
+
+  router.route('/newjob/:id')
+    .get((req, res)=>{
+      db.NewJob.findOne({ _id: req.params.id }, req.body, function (err, data) {
+        console.log(data);
+      res.json(data);
+    })
+      .catch(err=> res.status(422).json(err));
+    });
+
 // router.route('/newjob')
 //   .post(jobController.create);
 //
+
+router.route('/locations')
+.get((req, res)=>{
+  db.NewJob.find()
+  .then(dbNewJob=>{
+    res.json(dbNewJob);
+  })
+  .catch(err=> res.status(422).json(err));
+      // console.log(res);
+
+});
 
 module.exports = router;

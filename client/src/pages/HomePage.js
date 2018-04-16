@@ -16,7 +16,19 @@ class HomePage extends Component {
 
     console.log(this.props);
 
-
+    axios.get('/api/stuff')
+      .then(res => {
+        this.setState({
+          stuff: res.data
+        });
+      })
+      .catch(err => {
+        // if we got an error, we'll just log it and set stuff to an empty array
+        console.log(err);
+        this.setState({
+          stuff: []
+        });
+      });
   }
   render() {
     const { user } = this.props; // get the user prop from props

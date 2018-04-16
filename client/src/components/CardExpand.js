@@ -2,60 +2,105 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import Info from 'material-ui/svg-icons/action/info';
-import SupervisorAccount from 'material-ui/svg-icons/action/supervisor-account';
-import Event from 'material-ui/svg-icons/action/event';
-import List from 'material-ui/svg-icons/action/list';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
+import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-
-// import SmallCard from './SmallCard';
-
-
+import axios from 'axios';
+import Info from './Info';
+import Calendar from './Calendar';
+import Contacts from './Contacts';
+import Notes from './Notes';
 
 class CardExpand extends Component {
-  
+  state = {
+
+    info: this.props.cardData.info,
+    id: this.props.cardData._id,
+    companyName: this.props.cardData.companyName,
+    jobTitle: this.props.cardData.jobTitle,
+    pickedTab: null,
+  };
+
+  componentDidMount() {
+    this.setState({pickedTab: <Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>})
+  }
+
+  // loadCards = () => {
+  //   axios.get('/api/newjob/' + this.props.cardData._id).then(res=>
+  //     this.setState({info: res.data.info}))
+      // this.setState({info: res.data.info})
+    // ).then(this.setState({info: this.state.cardData.info}))
 
 
-  render() {
+
+  // handleChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // }
+
+  handleClick = choice => {
+    this.setState({pickedTab:choice});
+  };
+
+
+  // UpdateInfo = id => {
+  //   axios.patch('/api/newjob/' + id, {
+  //     info: this.state.info
+  //   })
+  //   .then(res=> res.json())
+  //   .catch(err=> console.log(err));
+
+  render(){
+
+
     
+    let Active = this.state.pickedTab;
     const style = {
       paperMenu: {
         display: 'inline-block',
         float: 'left',
-        margin: '16px 16px 16px 0',
+        marginTop: "16px",
+        marginBottom:"16px",
+        marginRight: '2%',
         width: '20%',
       },
       paperMain: {
         display: 'inline-block',
         float: 'right',
-        width: '65%',
-        margin: '16px 0 16px 10px',
         width: '75%',
+        marginTop: "16px",
+        marginBottom:"16px",
+        marginLeft: '2%',
         padding: 10,
       },
-      rightIcon: {
+      leftIcon: {
         textAlign: 'center',
         lineHeight: '24px',
       },
     };
     return (
       <div>
-        <h1>Google </h1>
+        <h1>{this.state.companyName} - {this.state.jobTitle} </h1>
         <Divider />
         <div className="main">
         <Paper style={style.paperMenu}>
-          <Menu>
-            <MenuItem leftIcon={<Info />} />
-            <MenuItem leftIcon={<SupervisorAccount />} />
-            <MenuItem leftIcon={<Event />} />
-            <MenuItem leftIcon={<List />} />
+
+          <Menu
+            disableAutoFocus={true}
+            >
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>)}>info</FontIcon>} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Contacts id={this.state.id}/>)}>supervisor_account</FontIcon>} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Calendar id={this.state.id}/>)}>event</FontIcon>} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Notes id={this.state.id}/>)}>list</FontIcon>} />
           </Menu>
         </Paper>
         <Paper style={style.paperMain}>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet est ac nisi convallis scelerisque vel a arcu. Cras ultricies vel lectus commodo ultrices. Maecenas euismod pellentesque iaculis. Nulla bibendum, sapien id rhoncus bibendum, lorem massa cursus justo, id imperdiet arcu erat eu ante. Nulla egestas scelerisque nulla et convallis. Quisque consequat dignissim nibh eget finibus. Aliquam est mauris, ornare eu urna fermentum, iaculis pharetra leo.
-          </p>
+          <div> 
+            {Active}
+          </div>
         </Paper>
         </div>
             <br />

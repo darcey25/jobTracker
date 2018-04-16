@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 export class MapContainer extends Component {
 
   state = {
+    markers: [],
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
   };
+
+  componentDidMount() {
+
+    this.loadLocations();
+
+  }
+
+  loadLocations = () => {
+    axios.get('/api/locations')
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          markers: res.data
+        });
+        console.log("markers", this.state.markers);
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          markers: []
+        });
+      });
+  }
+
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -41,24 +67,17 @@ render() {
           title={'Current location'}
           name={'Current location'}
         />
-        <Marker
-          onClick={this.onMarkerClick}
-          title={'Sample Place 1'}
-          name={'sp1'}
-          position={{lat: 30.274838, lng: -97.756184}}
-        />
-        <Marker
-          onClick={this.onMarkerClick}
-          title={'Sample Place 2'}
-          name={'sp2'}
-          position={{lat: 30.264354, lng: -97.741259}}
-        />
-        <Marker
-          onClick={this.onMarkerClick}
-          title={'Sample Place 3'}
-          name={'sp3'}
-          position={{lat: 30.262649, lng: -97.732255}}
-        />
+        {this.state.markers.map(item => {
+          return (
+            <Marker
+              onClick={this.onMarkerClick}
+              key={item._id}
+              title={item.companyName}
+              name={item.companyName}
+              position={item.position}
+            />
+          )
+        })}
         <InfoWindow
           marker={this.state.activeMarker}
           onOpen={this.windowHasOpened}

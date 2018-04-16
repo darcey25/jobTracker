@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React from 'react';
+import { GoogleApiWrapper } from 'google-maps-react';
 import MapContainer from "../MapContainer";
 import LinearProgress from 'material-ui/LinearProgress';
 import "./LoadingContainer.css";

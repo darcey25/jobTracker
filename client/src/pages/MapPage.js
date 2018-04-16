@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { withUser } from '../services/withUser';
-import MapContainer from '../components/Map/MapContainer';
 import LoadingContainer from '../components/Map/LoadingContainer';
 
 class MapPage extends Component {
@@ -19,6 +18,21 @@ class MapPage extends Component {
       return;
     }
 
+    axios.get('/api/stuff')
+      .then(res => {
+        this.setState({
+          stuff: res.data
+        });
+        console.log(this.state.stuff);
+        console.log("Something");
+      })
+      .catch(err => {
+        // if we got an error, we'll just log it and set stuff to an empty array
+        console.log(err);
+        this.setState({
+          stuff: []
+        });
+      });
   }
 
   render() {
