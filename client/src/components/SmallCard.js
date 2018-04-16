@@ -14,6 +14,7 @@ class SmallCard extends Component{
   state = {
     cardData: [],
     open: false,
+    currentSelectData: [],
   };
 
 componentDidMount() {
@@ -34,7 +35,8 @@ deleteJob = id => {
 
 }
 
-handleOpen = () => {
+handleOpen = (data) => {
+    this.setState({currentSelectData: data})
     this.setState({open: true});
 };
 
@@ -74,9 +76,9 @@ render(){
             margin: "8px",
             backgroundColor: item.cardColor
           }}
-          onClick={this.handleOpen}
           >
             <CardHeader
+              onClick={() => this.handleOpen(item)}
               title={item.companyName}
               subtitle={item.jobTitle}
               id={item._id}
@@ -114,19 +116,20 @@ render(){
               </FlatButton>
 
             </CardActions>
-            <div>
-              <Dialog
-                bodyStyle={{overflow: "auto"}}
-                modal={false}
-                open={this.state.open}
-                onRequestClose={this.handleClose}
-              >
-                <CardExpand />
-              </Dialog>
-            </div>
           </Card>
           );
         })}
+        <div>
+          <Dialog
+            bodyStyle={{overflow: "auto"}}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+            <CardExpand
+            cardData = {this.state.currentSelectData}/>
+          </Dialog>
+        </div>
   </div>
   );
 }

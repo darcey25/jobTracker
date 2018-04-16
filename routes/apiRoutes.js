@@ -111,6 +111,15 @@ router.route('/newjob')
     .then(dbNewJob=> res.json(dbNewJob))
     .catch(err=> res.status(422).json(err));
   });
+
+router.route('/newjob/:id')
+  .patch((req, res)=>{
+    console.log(req.body)
+    db.NewJob.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, data) {
+    res.json();
+  })
+    .catch(err=> res.status(422).json(err));
+  });
 // router.route('/newjob')
 //   .post(jobController.create);
 //
