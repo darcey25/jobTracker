@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { withUser } from '../services/withUser';
-import MapContainer from '../components/Map/MapContainer';
 import LoadingContainer from '../components/Map/LoadingContainer';
 
 class MapPage extends Component {
@@ -18,7 +17,7 @@ class MapPage extends Component {
       console.log(this.props.user);
       return;
     }
-    
+
     axios.get('/api/stuff')
       .then(res => {
         this.setState({
