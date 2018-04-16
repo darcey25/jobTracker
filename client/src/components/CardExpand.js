@@ -20,9 +20,21 @@ import axios from 'axios';
 
 class CardExpand extends Component {
   state = {
-    cardData: this.props.cardData,
-    info: this.props.cardData.info,
-    id: this.props.cardData._id
+    info: "",
+    id: this.props.cardData._id,
+    companyName: this.props.cardData.companyName,
+    jobTitle: this.props.cardData.jobTitle,
+  };
+
+  componentDidMount() {
+    this.loadCards();
+  }
+
+  loadCards = () => {
+    axios.get('/api/newjob/' + this.props.cardData._id).then(res=>
+      this.setState({info: res.data.info}))
+      // this.setState({info: res.data.info})
+    // ).then(this.setState({info: this.state.cardData.info}))
   };
 
   handleChange = event => {
@@ -41,30 +53,32 @@ class CardExpand extends Component {
   }
 
   render() {
-console.log(this.state)
     const style = {
       paperMenu: {
         display: 'inline-block',
         float: 'left',
-        margin: '16px 16px 16px 0',
+        marginTop: "16px",
+        marginBottom:"16px",
+        marginRight: '2%',
         width: '20%',
       },
       paperMain: {
         display: 'inline-block',
         float: 'right',
-        width: '65%',
-        margin: '16px 0 16px 10px',
         width: '75%',
+        marginTop: "16px",
+        marginBottom:"16px",
+        marginLeft: '2%',
         padding: 10,
       },
-      rightIcon: {
+      leftIcon: {
         textAlign: 'center',
         lineHeight: '24px',
       },
     };
     return (
       <div>
-        <h1>{this.state.cardData.companyName} - {this.state.cardData.jobTitle} </h1>
+        <h1>{this.state.companyName} - {this.state.jobTitle} </h1>
         <Divider />
         <div className="main">
         <Paper style={style.paperMenu}>
@@ -89,11 +103,9 @@ console.log(this.state)
               multiLine={true}
             />
             <FlatButton
-              label="Submit"
+              label="Save"
               onClick={() => this.UpdateInfo(this.state.id)}
               secondary={true}
-              type="submit"
-              className="submit"
               style={{
                 float: 'right'
               }}
