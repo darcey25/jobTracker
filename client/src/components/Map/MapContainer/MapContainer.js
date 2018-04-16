@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 export class MapContainer extends Component {
 
   state = {
+    markers: [],
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
   };
+
+  componentDidMount() {
+
+    this.loadLocations();
+
+  }
+
+  loadLocations = () => {
+    axios.get('/api/locations')
+      .then(res => {
+        console.log(res);
+        // this.setState({
+        //   markers: res.data
+        // });
+        // console.log(this.state.locations);
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          markers: []
+        });
+      });
+  }
+
 
   onMarkerClick = (props, marker, e) =>
     this.setState({

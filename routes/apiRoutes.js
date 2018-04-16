@@ -124,4 +124,15 @@ router.route('/newjob/:id')
 //   .post(jobController.create);
 //
 
+router.route('/locations')
+.get((req, res)=>{
+  db.NewJob.find()
+  .then(dbNewJob=>{
+    res.json(dbNewJob);
+  })
+  .catch(err=> res.status(422).json(err));
+      // console.log(res);
+
+});
+
 module.exports = router;

@@ -23,8 +23,6 @@ class HomePage extends Component {
         this.setState({
           stuff: res.data
         });
-        console.log(this.state.stuff);
-        console.log("Something");
       })
       .catch(err => {
         // if we got an error, we'll just log it and set stuff to an empty array
