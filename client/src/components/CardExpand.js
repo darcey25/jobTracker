@@ -6,13 +6,10 @@ import Info from 'material-ui/svg-icons/action/info';
 import SupervisorAccount from 'material-ui/svg-icons/action/supervisor-account';
 import Event from 'material-ui/svg-icons/action/event';
 import List from 'material-ui/svg-icons/action/list';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
-import ContentLink from 'material-ui/svg-icons/content/link';
 import Divider from 'material-ui/Divider';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import Download from 'material-ui/svg-icons/file/file-download';
-import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
+import FlatButton from 'material-ui/FlatButton';
+
 // import SmallCard from './SmallCard';
 
 
@@ -45,7 +42,7 @@ class CardExpand extends Component {
     };
     return (
       <div>
-        <h1>{this.props.title} </h1>
+        <h1>Google </h1>
         <Divider />
         <div className="main">
         <Paper style={style.paperMenu}>
@@ -61,6 +58,28 @@ class CardExpand extends Component {
           </p>
         </Paper>
         </div>
+            <br />
+              <div>
+              <FlatButton
+                label="Cancel"
+                secondary={true}
+                //handle close
+                onClick={this.handleClose}
+                style={{
+                  float: 'right'
+                }}
+              />
+              <FlatButton
+                label="Submit"
+                secondary={true}
+                onClick={this.handleClose}
+                type="submit"
+                className="submit"
+                style={{
+                  float: 'right'
+                }}
+              />
+            </div>
       </div>
     );
   }
