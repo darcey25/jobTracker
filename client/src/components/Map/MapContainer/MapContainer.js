@@ -6,6 +6,10 @@ import HomeSetModal from "./HomeSetModal";
 export class MapContainer extends Component {
 
   state = {
+    home: {
+      'lat': 30.2672,
+      'lng': -97.7431
+    },
     markers: [],
     showingInfoWindow: false,
     activeMarker: {},
@@ -14,21 +18,42 @@ export class MapContainer extends Component {
 
   componentDidMount() {
 
+    this.loadHome();
     this.loadLocations();
+    console.log(this.state.home);
+    console.log(this.state.home.lat);
+    console.log(this.state.home.lng);
 
+  }
+
+  loadHome = () => {
+    axios.get('api/user/' + this.props.user.id)
+      .then(res => {
+        console.log(res.data.position[0])
+        this.setState({
+          home: res.data.position[0]
+        });
+        console.log(this.state.home.lat);
+      })
+      // .catch(err => {
+      //   console.log(err);
+      //   this.setState({
+      //     home: {
+      //       'lat': 30.2672,
+      //       'lng': -97.7431
+      //     }
+      //   });
+      // });
   }
 
   loadLocations = () => {
     axios.get('/api/locations')
       .then(res => {
-        console.log(res.data);
         this.setState({
           markers: res.data
         });
-        console.log("markers", this.state.markers);
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           markers: []
         });
@@ -60,14 +85,15 @@ render() {
         google={this.props.google}
         zoom={13}
         initialCenter={{
-            lat: 30.2672,
-            lng: -97.7431
+            lat: this.state.home.lat,
+            lng: this.state.home.lng
           }}
       >
         <Marker
           onClick={this.onMarkerClick}
-          title={'Current location'}
-          name={'Current location'}
+          title={'Home'}
+          name={'Home'}
+
         />
         {this.state.markers.map(item => {
           return (
@@ -90,7 +116,9 @@ render() {
             </div>
         </InfoWindow>
       </Map>
-      <HomeSetModal />
+      <HomeSetModal
+        userId={this.props.user.id}
+      />
     </div>
     );
   }

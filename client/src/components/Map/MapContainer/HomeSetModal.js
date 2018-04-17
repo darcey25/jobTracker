@@ -35,7 +35,7 @@ handleFormSubmit = (event) => {
 
   const address = this.state.address;
   console.log(address);
-  // if (this.state.companyName && this.state.jobTitle){
+  // if (this.state.address && this.state.jobTitle){
   //   axios.post('/api/newjob', {
   //     companyName,
   //     jobTitle,
@@ -52,7 +52,7 @@ handleFormSubmit = (event) => {
       <div>
         <RaisedButton
         className = "addJob"
-        label="Set home"
+        label="set home"
         labelPosition="before"
         onClick={this.handleOpen}
         secondary={true}
@@ -80,7 +80,10 @@ handleFormSubmit = (event) => {
           open={this.state.open}>
             <form onClick = {this.handleFormSubmit}>
             <div className="form-group">
-              <LocationSearchInput />
+              <LocationSearchInput
+                purpose={'setHome'}
+                userId={this.props.userId}
+              />
               </div>
               <br />
               <div>

@@ -82,6 +82,24 @@ router.route('/stuff')
     ]);
   });
 
+router.route('/user/:id')
+  .get((req, res)=>{
+    console.log(req.body)
+    db.User.findOne({ _id: req.params.id }, function (err, data) {
+    res.json(data);
+  })
+    .catch(err=> res.status(422).json(err));
+  });
+
+router.route('/user/:id')
+  .patch((req, res)=>{
+    console.log(req.body)
+    db.User.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, data) {
+    res.json();
+  })
+    .catch(err=> res.status(422).json(err));
+  });
+
 router.route('/newjob')
   .post((req, res) =>{
     db.NewJob.create(req.body)

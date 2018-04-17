@@ -45,7 +45,9 @@ class MapPage extends Component {
         <Fragment>
           {user &&
             <div>
-              <LoadingContainer />
+              <LoadingContainer
+                user={this.props.user}
+               />
             </div>
           }
           {!user &&
