@@ -46,6 +46,7 @@ class Notes extends Component {
               <TextField
               id="text-field-controlled"
               name="notes"
+              hintText="Add notes"
               value={this.state.notes}
               onChange={this.handleChange}
               fullWidth={true}

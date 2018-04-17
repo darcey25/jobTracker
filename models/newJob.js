@@ -8,9 +8,9 @@ const NewJobSchema = new Schema({
   stage: {type: String, required: true, default: "apply"},
   cardColor: { type: String, required: true },
   titleColor: { type: String, required: true },
-  info: { type: String, required: true, default: "add job info here!" },
+  info: { type: String, required: false },
   dateInfo: {type: Array},
-  notes: {type: String, required: true, default: "add job notes here!"},
+  notes: {type: String, required: false},
   contacts: [
   	{
   		name: { type: String, required: true},

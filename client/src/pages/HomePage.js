@@ -38,14 +38,24 @@ class HomePage extends Component {
       <Fragment>
         {user &&
           <div>
-
+          <List>
+           {stuff.map((s, i) => <ListItem key={i} primaryText={s} />)}
+          </List>
           <SmallCard/>
           <AddCardModal/>
           </div>
         }
         
         {!user &&
-          <div>Hey! I don't recognize you! Register and log in using the link above</div>
+          <div
+            style={{
+              textAlign: "center",
+              margin: "auto 20px",
+              paddingTop: "30px",
+              fontFamily: "Lobster, cursive",
+              fontSize: "20px"
+            }}
+            >Hey! I don't recognize you! Register and log in using the link above</div>
         }
       </Fragment>
     );
