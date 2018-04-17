@@ -16,6 +16,7 @@ class Contacts extends Component {
     name: "",
     phoneNumber: "",
     email: "",
+    address: "",
     id: this.props.id,
     open: false,
   };
@@ -24,23 +25,50 @@ class Contacts extends Component {
     this.loadName();
     this.loadEmail();
     this.loadNumber();
+    this.loadAddress();
   }
 
   loadName = () => {
-    axios.get('/api/newjob/' + this.props.id).then(res=>
-      this.setState({name: res.data.contacts[0].name }))
+    axios.get('/api/newjob/' + this.props.id).then(res=> {
+    	if (res.data.contacts[0] === undefined) {
+      		this.setState({name: ""})
+    	} else {
+    		this.setState({name: res.data.contacts[0].name })
+    	}
+    });
       // this.setState({info: res.data.info})
     // ).then(this.setState({info: this.state.cardData.info}))
   };
   loadEmail = () => {
-    axios.get('/api/newjob/' + this.props.id).then(res=>
-      this.setState({email: res.data.contacts[0].email }))
+    axios.get('/api/newjob/' + this.props.id).then(res=> {
+    	if(res.data.contacts[0] === undefined) {
+      		this.setState({email: ""})
+    	} else {
+    		this.setState({email: res.data.contacts[0].email })
+    	}
+    });
       // this.setState({info: res.data.info})
     // ).then(this.setState({info: this.state.cardData.info}))
   };
   loadNumber = () => {
-    axios.get('/api/newjob/' + this.props.id).then(res=>
-      this.setState({phoneNumber: res.data.contacts[0].phoneNumber }))
+    axios.get('/api/newjob/' + this.props.id).then(res=> {
+    	if(res.data.contacts[0] === undefined) {
+      		this.setState({phoneNumber: ""})
+    	} else {
+    		this.setState({phoneNumber: res.data.contacts[0].phoneNumber })
+    	}
+    });
+      // this.setState({info: res.data.info})
+    // ).then(this.setState({info: this.state.cardData.info}))
+  };
+  loadAddress = () => {
+    axios.get('/api/newjob/' + this.props.id).then(res=> {
+    	if(res.data.contacts[0] === undefined) {
+      		this.setState({address: ""})
+    	} else {
+    		this.setState({address: res.data.contacts[0].address })
+    	}
+    });
       // this.setState({info: res.data.info})
     // ).then(this.setState({info: this.state.cardData.info}))
   };
@@ -54,7 +82,7 @@ class Contacts extends Component {
 
   UpdateInfo = id => {
     axios.patch('/api/newjob/' + id, {
-       contacts: {name: this.state.name, phoneNumber: this.state.phoneNumber, email: this.state.email}
+       contacts: {name: this.state.name, phoneNumber: this.state.phoneNumber, email: this.state.email, address:this.state.address}
     })
     .then(res=> res.json())
     .catch(err=> console.log(err));
@@ -112,6 +140,18 @@ class Contacts extends Component {
 			id="text-field-controlled"
 			name="email"
 			value={this.state.email}
+			onChange={this.handleChange}
+		/>}
+	      />,
+	      <ListItem
+	        leftIcon={<CommunicationEmail color={indigo500} />}
+	        primaryText={<TextField 
+			style={style} 
+			hintText="Address" 
+			fullWidth={true}
+			id="text-field-controlled"
+			name="address"
+			value={this.state.address}
 			onChange={this.handleChange}
 		/>}
 	      />
