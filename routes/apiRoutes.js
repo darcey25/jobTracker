@@ -118,7 +118,7 @@ router.route('/newjob/:id')
     db.NewJob.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, data) {
     res.json();
   })
-    .catch(err=> res.status(422).json(err));
+    // .catch(err=> res.status(422).json(err));
   });
 
 
@@ -128,7 +128,7 @@ router.route('/newjob/:id')
         console.log(data);
       res.json(data);
     })
-      .catch(err=> res.status(422).json(err));
+      // .catch(err=> res.status(422).json(err));
     });
 
 // router.route('/newjob')
