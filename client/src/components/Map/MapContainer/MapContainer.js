@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import HomeSetModal from "./HomeSetModal";
 
 export class MapContainer extends Component {
 
@@ -54,6 +55,7 @@ export class MapContainer extends Component {
 render() {
 
     return (
+    <div>
       <Map
         google={this.props.google}
         zoom={13}
@@ -88,6 +90,8 @@ render() {
             </div>
         </InfoWindow>
       </Map>
+      <HomeSetModal />
+    </div>
     );
   }
 }

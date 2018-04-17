@@ -146,7 +146,9 @@ class Contacts extends Component {
   />,
         <ListItem
           leftIcon={<CommunicationEmail color={indigo500} />}
-          primaryText={<LocationSearchInput id={this.state.id} />}
+          primaryText={<LocationSearchInput id={this.state.id}
+          style={style}
+         />}
     //       primaryText={<TextField
     // 	style={style}
     // 	hintText="Email address"
