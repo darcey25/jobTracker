@@ -3,7 +3,6 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
 import './style.css'
 
-
 const styles = {
   headline: {
     fontSize: 24,
@@ -16,7 +15,6 @@ const styles = {
   }
 
 };
-
 
 const TabsExampleSimple = () => (
   <div>

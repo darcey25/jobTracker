@@ -97,13 +97,13 @@ class Contacts extends Component {
 
 
   render(){
-  	const style = {
-  	marginLeft: 20,
-  	};
+    const style = {
+    marginLeft: 20,
+    };
     return(
   <div>
-  	<Subheader>Contacts</Subheader>
-  	<form>
+    <Subheader>Contacts</Subheader>
+    <form>
     <List>
       <ListItem
         leftIcon={<AccountCircle color={indigo500} />}

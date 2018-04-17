@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
 import {red500, red400, pink500, pink400, purple500, purple400, deepPurple500, deepPurple400, blue500, blue400, orange500, orange400, cyan500, cyan400, teal500, teal400, lightBlue500, lightBlue400, amber500, amber400, deepOrange500, deepOrange400, indigo500, indigo400, green500, green400, blueGrey500, blueGrey400} from 'material-ui/styles/colors';
 import './style.css'
