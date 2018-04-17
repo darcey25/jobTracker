@@ -74,7 +74,7 @@ render() {
               key={item._id}
               title={item.companyName}
               name={item.companyName}
-              position={item.position}
+              position={item.position[0]}
             />
           )
         })}

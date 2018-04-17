@@ -11,8 +11,12 @@ class LocationSearchInput extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log(this.props.id);
+  }
+
   handleChange = (address) => {
-    this.setState({ address })
+    this.setState({ address });
   }
 
   handleSelect = (address) => {
@@ -20,15 +24,12 @@ class LocationSearchInput extends Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => {
         console.log('Success', latLng);
-        // UpdateInfo = id => {
-        //   axios.patch('/api/newjob/' + id, {
-        //      position: {latLng}
-        //   })
-        //   .then(res=> res.json())
-        //   .catch(err=> console.log(err));
-        // }
+        axios.patch('/api/newjob/' + this.props.id, {
+           position: latLng
+        })
+        // .then(res=> res.json())
       })
-      .catch(error => console.error('Error', error))
+      // .catch(error => console.error('Error', error))
   }
 
   render() {

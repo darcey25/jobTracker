@@ -16,6 +16,12 @@ const NewJobSchema = new Schema({
   		email: {type: String, required: true},
   		address: {type: String, required: true}
   	}
+  ],
+  position: [
+    {
+      lat: { type: String, required: true },
+      lng: { type: String, required: true }
+    }
   ]
 });
 

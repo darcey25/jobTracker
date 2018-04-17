@@ -10,6 +10,7 @@ import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bu
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
+import LocationSearchInput from "./LocationSearchInput.js"
 
 class Contacts extends Component {
   state = {
@@ -106,9 +107,9 @@ class Contacts extends Component {
     <List>
       <ListItem
         leftIcon={<AccountCircle color={indigo500} />}
-        primaryText={<TextField 
-	    	style={style} 
-	    	hintText="Name" 
+        primaryText={<TextField
+	    	style={style}
+	    	hintText="Name"
 	    	fullWidth={true}
 	    	id="text-field-controlled"
 	    	name="name"
@@ -121,9 +122,9 @@ class Contacts extends Component {
 	      <ListItem
 	        insetChildren={true}
 	        leftIcon={<CommunicationCall color={indigo500} />}
-	        primaryText={<TextField 
-	    	style={style} 
-	    	hintText="Phone number" 
+	        primaryText={<TextField
+	    	style={style}
+	    	hintText="Phone number"
 	    	fullWidth={true}
 	    	id="text-field-controlled"
 	    	name="phoneNumber"
@@ -133,28 +134,29 @@ class Contacts extends Component {
 	      />,
 	      <ListItem
 	        leftIcon={<CommunicationEmail color={indigo500} />}
-	        primaryText={<TextField 
-			style={style} 
-			hintText="Email address" 
-			fullWidth={true}
-			id="text-field-controlled"
-			name="email"
-			value={this.state.email}
-			onChange={this.handleChange}
-		/>}
-	      />,
-	      <ListItem
-	        leftIcon={<CommunicationEmail color={indigo500} />}
-	        primaryText={<TextField 
-			style={style} 
-			hintText="Address" 
+	        primaryText={<TextField
+			style={style}
+			hintText="Address"
 			fullWidth={true}
 			id="text-field-controlled"
 			name="address"
 			value={this.state.address}
 			onChange={this.handleChange}
 		/>}
-	      />
+  />,
+        <ListItem
+          leftIcon={<CommunicationEmail color={indigo500} />}
+          primaryText={<LocationSearchInput id={this.state.id} />}
+    //       primaryText={<TextField
+    // 	style={style}
+    // 	hintText="Email address"
+    // 	fullWidth={true}
+    // 	id="text-field-controlled"
+    // 	name="email"
+    // 	value={this.state.email}
+    // 	onChange={this.handleChange}
+    // />}
+        />
 	    ]}
       />
     </List>
