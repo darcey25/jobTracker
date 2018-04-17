@@ -12,3 +12,13 @@
 	font-size: 22px !Important;
 	margin-right: 8px  !Important;
 }
+
+
+@media only screen and (max-width:550px) {
+	.TabNav{
+		font-size: 8px !Important;
+		overflow: visible !Important;
+
+	}
+
+}
