@@ -53,3 +53,5 @@ class LocationSearchInput extends React.Component {
     );
   }
 }
+
+export default LocationSearchInput;
