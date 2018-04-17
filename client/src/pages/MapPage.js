@@ -6,17 +6,18 @@ import LoadingContainer from '../components/Map/LoadingContainer';
 class MapPage extends Component {
   state = {
     stuff: null,
-    locations: []
+    locations: [],
+    home: {}
   }
 
   componentDidMount() {
     // only try loading stuff if the user is logged in.
     if (!this.props.user) {
       console.log("No user detected");
-      console.log(this.props);
-      console.log(this.props.user);
       return;
     }
+
+    this.loadHome();
 
     axios.get('/api/stuff')
       .then(res => {
@@ -35,6 +36,25 @@ class MapPage extends Component {
       });
   }
 
+  loadHome = () => {
+    axios.get('api/user/' + this.props.user.id)
+      .then(res => {
+        console.log(res.data.position[0])
+        this.setState({
+          home: res.data.position[0]
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          home: {
+            'lat': 30.2672,
+            'lng': -97.7431
+          }
+        });
+      });
+  }
+
   render() {
 
     const { user } = this.props; // get the user prop from props
@@ -47,6 +67,7 @@ class MapPage extends Component {
             <div>
               <LoadingContainer
                 user={this.props.user}
+                home={this.state.home}
                />
             </div>
           }
