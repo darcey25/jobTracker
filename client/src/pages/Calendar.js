@@ -10,35 +10,12 @@ import './Calendar.css';
 
 BigCalendar.momentLocalizer(moment);
 
-// let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
-
-// let MyCalendar = () => (
-//   <BigCalendar
-//     // events={events}
-//     views={allViews}
-//     step={60}
-//     showMultiDayTimes
-//     defaultDate={new Date(2015, 3, 1)}
-//   />
-// )
 
 class Calendar extends Component {
 
   state = {
     stuff: null,
-    events: [{
-      id: 0,
-      title: 'All Day Event very long title',
-      allDay: true,
-      start: new Date("2018-04-10"),
-      end: new Date("2018-04-10"),
-    },
-    {
-      id: 1,
-      title: 'Long Event',
-      start: new Date("2018-04-15"),
-      end: new Date("2018-04-25"),
-    }]
+    events: []
   }
 
   componentDidMount() {
@@ -49,7 +26,54 @@ class Calendar extends Component {
       console.log(this.props.user);
       return;
     }
+    axios.get('/api/stuff')
+      .then(res => {
+        this.setState({
+          stuff: res.data
+        });
+        console.log(this.state.stuff);
+        console.log("Something");
+      })
+      .catch(err => {
+        // if we got an error, we'll just log it and set stuff to an empty array
+        console.log(err);
+        this.setState({
+          stuff: []
+        });
+      });
+
+    this.loadDates();
   }
+
+  loadDates = () =>{
+    axios.get('/api/locations')
+      .then(res => {
+        let id = 0
+        let tempEvents=[];
+        let dateArray = res.data;
+        dateArray.map(item=>{
+          if(item.dateInfo[0] !== undefined){
+
+          tempEvents.push(
+            {
+              id: id,
+              title: item.dateInfo[0].dateDesc,
+              start: new Date(item.dateInfo[0].date),
+              end: new Date(item.dateInfo[0].date),
+            }
+          )
+          id++
+        }
+        })
+        this.setState({
+          events : tempEvents
+        });
+        console.log(tempEvents)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
 
   render() {
     const { user } = this.props; // get the user prop from props
@@ -67,6 +91,7 @@ class Calendar extends Component {
                   showMultiDayTimes
                   defaultDate={new Date()}
                   className = "Calendar"
+                  onSelectEvent={event => alert(event.title)}
                 />
               </Row>
             </Grid>

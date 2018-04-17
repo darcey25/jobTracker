@@ -9,13 +9,21 @@ const NewJobSchema = new Schema({
   cardColor: { type: String, required: true },
   titleColor: { type: String, required: true },
   info: { type: String, required: true, default: "add job info here!" },
+  dateInfo: {type: Array},
   notes: {type: String, required: true, default: "add job notes here!"},
   contacts: [
   	{
   		name: { type: String, required: true},
   		phoneNumber: { type: String, required: true},
-  		email: {type: String, required: true}
+  		email: {type: String, required: true},
+  		address: {type: String, required: true}
   	}
+  ],
+  position: [
+    {
+      lat: { type: String, required: true },
+      lng: { type: String, required: true }
+    }
   ]
 });
 

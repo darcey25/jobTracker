@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import HomeSetModal from "./HomeSetModal";
 
 export class MapContainer extends Component {
 
   state = {
+    home: {},
     markers: [],
     showingInfoWindow: false,
     activeMarker: {},
@@ -14,20 +16,18 @@ export class MapContainer extends Component {
   componentDidMount() {
 
     this.loadLocations();
+    console.log(this.state.home);
 
   }
 
   loadLocations = () => {
     axios.get('/api/locations')
       .then(res => {
-        console.log(res.data);
         this.setState({
           markers: res.data
         });
-        console.log("markers", this.state.markers);
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           markers: []
         });
@@ -54,18 +54,20 @@ export class MapContainer extends Component {
 render() {
 
     return (
+    <div>
       <Map
         google={this.props.google}
         zoom={13}
         initialCenter={{
-            lat: 30.2672,
-            lng: -97.7431
+            lat: this.props.home.lat,
+            lng: this.props.home.lng
           }}
       >
         <Marker
           onClick={this.onMarkerClick}
-          title={'Current location'}
-          name={'Current location'}
+          title={'Home'}
+          name={'Home'}
+
         />
         {this.state.markers.map(item => {
           return (
@@ -74,7 +76,7 @@ render() {
               key={item._id}
               title={item.companyName}
               name={item.companyName}
-              position={item.position}
+              position={item.position[0]}
             />
           )
         })}
@@ -88,6 +90,10 @@ render() {
             </div>
         </InfoWindow>
       </Map>
+      <HomeSetModal
+        userId={this.props.user.id}
+      />
+    </div>
     );
   }
 }
