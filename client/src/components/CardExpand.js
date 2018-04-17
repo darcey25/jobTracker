@@ -24,7 +24,7 @@ class CardExpand extends Component {
   };
 
   componentDidMount() {
-    this.setState({pickedTab: <Info id={this.state.id} info={this.state.info}/>})
+    this.setState({pickedTab: <Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>})
   }
 
   // loadCards = () => {

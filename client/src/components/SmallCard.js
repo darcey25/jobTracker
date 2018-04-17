@@ -111,8 +111,8 @@ render(){
             onRequestClose={this.handleClose}
           >
             <CardExpand
-            // cardData = {this.state.currentSelectData}
-            cardData = {this.state.cardData}/>
+            cardData = {this.state.currentSelectData}
+            />
 
           </Dialog>
         </div>
