@@ -7,9 +7,9 @@ const NewJobSchema = new Schema({
   jobTitle: { type: String, required: true },
   cardColor: { type: String, required: true },
   titleColor: { type: String, required: true },
-  info: { type: String, required: true, default: "add job info here!" },
+  info: { type: String, required: false },
   dateInfo: {type: Array},
-  notes: {type: String, required: true, default: "add job notes here!"},
+  notes: {type: String, required: false},
   contacts: [
   	{
   		name: { type: String, required: true},
