@@ -45,6 +45,7 @@ handleClose = () => {
 
 
 render(){
+
   return(
   <div
     style={{
@@ -60,7 +61,6 @@ render(){
           onClick={this.handleOpen}
           style={{
             margin: "8px",
-
             backgroundColor: item.cardColor
           }}
           >
@@ -98,10 +98,7 @@ render(){
                     float: "right"
                   }}
                   className="material-icons">delete</FontIcon>
-
               </FlatButton>
-
-              
             </CardActions>
           </Card>
           );
@@ -114,7 +111,9 @@ render(){
             onRequestClose={this.handleClose}
           >
             <CardExpand
-            cardData = {this.state.currentSelectData}/>
+            // cardData = {this.state.currentSelectData}
+            cardData = {this.state.cardData}/>
+
           </Dialog>
         </div>
   </div>

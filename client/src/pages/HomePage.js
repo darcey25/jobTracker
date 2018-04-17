@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import axios from 'axios';
 import { withUser } from '../services/withUser';
 import SmallCard from '../components/SmallCard';
 import AddCardModal from '../components/AddCardModal';

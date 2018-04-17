@@ -54,9 +54,6 @@ class CardExpand extends Component {
   //   .catch(err=> console.log(err));
 
   render(){
-
-
-    
     let Active = this.state.pickedTab;
     const style = {
       paperMenu: {
