@@ -9,6 +9,14 @@ const NewJobSchema = new Schema({
   titleColor: { type: String, required: true },
   info: { type: String, required: true, default: "add job info here!" },
   dateInfo: {type: Array},
+  notes: {type: String, required: true, default: "add job notes here!"},
+  contacts: [
+  	{
+  		name: { type: String, required: true},
+  		phoneNumber: { type: String, required: true},
+  		email: {type: String, required: true}
+  	}
+  ]
 });
 
 const NewJob = mongoose.model("NewJob", NewJobSchema);

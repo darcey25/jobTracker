@@ -5,7 +5,6 @@ import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import moment from 'moment';
 
-
 class CalendarForm extends Component {
   state = {
     dateInfo:"",
@@ -20,20 +19,25 @@ class CalendarForm extends Component {
   }
 
   loadCards = () => {
-    axios.get('/api/newjob/' + this.props.id).then(res=>
-      this.setState({dateInfo:res.data.dateInfo}))
+    axios.get('/api/newjob/' + this.props.id).then(res=>{
+      if(res.data.dateInfo[0] === undefined){
+      this.setState({date: "choose a date for your interview"})}else{
+        this.setState({date: res.data.dateInfo[0].date})
+      }
+    });
       // this.setState({info: res.data.info})
     // ).then(this.setState({info: this.state.cardData.info}))
-    console.log(this.state.dateInfo)
+
   };
 
   loadDesc = () => {
-    axios.get('/api/newjob/' + this.props.id).then(res=>
-      this.setState({dateDesc:res.data.dateInfo[1]}))
-      // this.setState({info: res.data.info})
-    // ).then(this.setState({info: this.state.cardData.info}))
-    console.log(this.state.dateInfo)
-  };
+    axios.get('/api/newjob/' + this.props.id).then(res=> {
+      if(res.data.dateInfo[0] === undefined){
+      this.setState({dateDesc: ""})}else{
+        this.setState({dateDesc:res.data.dateInfo[0].dateDesc})
+      }
+    });
+};
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -49,33 +53,31 @@ class CalendarForm extends Component {
   }
 
   UpdateInfo = id => {
-    this.setState({
-  dateInfo: [this.state.date , this.state.dateDesc]
-});
+//     this.setState({
+//   dateInfo: [this.state.date , this.state.dateDesc]
+// });
     axios.patch('/api/newjob/' + id, {
       // date: this.state.date,
       // dateDesc: this.state.dateDesc,
-      dateInfo: this.state.dateInfo
+      dateInfo: {date: this.state.date, dateDesc: this.state.dateDesc}
     })
     .then(res=> res.json())
     .catch(err=> console.log(err));
   }
   render(){
-    let defaultDate = this.state.date
-    let newdate ={defaultDate}
     return(
       <div>
         <form>
           <div className="form-group">
             <DatePicker
-              hintText="set interview date"
-              defaultDate={newdate}
+              hintText={this.state.date}
               name="date"
               onChange={(event, x) => {this.handleChangeDate(x);}}
              />
             <TextField
               id="text-field-controlled"
               name="dateDesc"
+              hintText="write a description and time of your interview"
               value={this.state.dateDesc}
               onChange={this.handleChange}
               fullWidth={true}
