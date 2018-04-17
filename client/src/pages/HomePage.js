@@ -38,9 +38,6 @@ class HomePage extends Component {
       <Fragment>
         {user &&
           <div>
-          <List>
-           {stuff.map((s, i) => <ListItem key={i} primaryText={s} />)}
-          </List>
           <SmallCard/>
           <AddCardModal/>
           </div>
