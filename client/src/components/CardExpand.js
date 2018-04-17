@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios';
 import Info from './Info';
-import Calendar from './Calendar';
+import CalendarForm from './CalendarForm';
 import Contacts from './Contacts';
 import Notes from './Notes';
 
@@ -16,7 +16,6 @@ import Notes from './Notes';
 
 class CardExpand extends Component {
   state = {
-
     info: this.props.cardData.info,
     id: this.props.cardData._id,
     companyName: this.props.cardData.companyName,
@@ -58,7 +57,7 @@ class CardExpand extends Component {
   render(){
 
 
-    
+
     let Active = this.state.pickedTab;
     const style = {
       paperMenu: {
@@ -95,12 +94,12 @@ class CardExpand extends Component {
             >
             <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>)}>info</FontIcon>} />
             <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Contacts id={this.state.id}/>)}>supervisor_account</FontIcon>} />
-            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Calendar id={this.state.id}/>)}>event</FontIcon>} />
+            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<CalendarForm id={this.state.id}/>)}>event</FontIcon>} />
             <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Notes id={this.state.id}/>)}>list</FontIcon>} />
           </Menu>
         </Paper>
         <Paper style={style.paperMain}>
-          <div> 
+          <div>
             {Active}
           </div>
         </Paper>

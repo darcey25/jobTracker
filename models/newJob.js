@@ -8,6 +8,7 @@ const NewJobSchema = new Schema({
   cardColor: { type: String, required: true },
   titleColor: { type: String, required: true },
   info: { type: String, required: true, default: "add job info here!" },
+  dateInfo: {type: Array},
 });
 
 const NewJob = mongoose.model("NewJob", NewJobSchema);
