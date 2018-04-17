@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 
 class Info extends Component {
   state = {
     info: "",
     id: this.props.id,
-    companyName: this.props.companyName,
-    jobTitle: this.props.jobTitle,
   };
 
   componentDidMount() {
@@ -41,6 +41,7 @@ class Info extends Component {
   render(){
     return(
   <div>
+  <Subheader>Job Info</Subheader>
    <form>
             <div className="form-group">
               <TextField

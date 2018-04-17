@@ -19,11 +19,12 @@ class CardExpand extends Component {
     id: this.props.cardData._id,
     companyName: this.props.cardData.companyName,
     jobTitle: this.props.cardData.jobTitle,
+    notes: this.props.cardData.notes,
     pickedTab: null,
   };
 
   componentDidMount() {
-    this.setState({pickedTab: <Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>})
+    this.setState({pickedTab: <Info id={this.state.id} info={this.state.info}/>})
   }
 
   // loadCards = () => {
@@ -86,12 +87,13 @@ class CardExpand extends Component {
         <Paper style={style.paperMenu}>
 
           <Menu
+            menuItemStyle={{width: 144}}
             disableAutoFocus={true}
             >
-            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>)}>info</FontIcon>} />
-            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Contacts id={this.state.id}/>)}>supervisor_account</FontIcon>} />
-            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Calendar id={this.state.id}/>)}>event</FontIcon>} />
-            <MenuItem leftIcon={<FontIcon className="material-icons" onClick={() => this.handleClick(<Notes id={this.state.id}/>)}>list</FontIcon>} />
+            <MenuItem onClick={() => this.handleClick(<Info id={this.state.id} info={this.state.info}/>)} leftIcon={<FontIcon className="material-icons" >info</FontIcon>} />
+            <MenuItem onClick={() => this.handleClick(<Contacts id={this.state.id}/>)} leftIcon={<FontIcon className="material-icons" >supervisor_account</FontIcon>} />
+            <MenuItem onClick={() => this.handleClick(<Calendar id={this.state.id}/>)} leftIcon={<FontIcon className="material-icons" >event</FontIcon>} />
+            <MenuItem onClick={() => this.handleClick(<Notes id={this.state.id} notes={this.state.notes}/>)} leftIcon={<FontIcon className="material-icons" >list</FontIcon>} />
           </Menu>
         </Paper>
         <Paper style={style.paperMain}>
