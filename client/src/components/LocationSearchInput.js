@@ -24,12 +24,17 @@ class LocationSearchInput extends Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => {
         console.log('Success', latLng);
-        axios.patch('/api/newjob/' + this.props.id, {
-           position: latLng
-        })
-        // .then(res=> res.json())
+        if (this.props.purpose === 'setMarker') {
+          axios.patch('/api/newjob/' + this.props.id, {
+            position: latLng
+          })
+        }
+        else if (this.props.purpose === 'setHome') {
+          axios.patch('/api/user/' + this.props.userId, {
+            position: latLng
+          })
+        }
       })
-      // .catch(error => console.error('Error', error))
   }
 
   render() {

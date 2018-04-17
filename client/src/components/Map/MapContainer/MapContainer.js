@@ -6,6 +6,7 @@ import HomeSetModal from "./HomeSetModal";
 export class MapContainer extends Component {
 
   state = {
+    home: {},
     markers: [],
     showingInfoWindow: false,
     activeMarker: {},
@@ -15,20 +16,18 @@ export class MapContainer extends Component {
   componentDidMount() {
 
     this.loadLocations();
+    console.log(this.state.home);
 
   }
 
   loadLocations = () => {
     axios.get('/api/locations')
       .then(res => {
-        console.log(res.data);
         this.setState({
           markers: res.data
         });
-        console.log("markers", this.state.markers);
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           markers: []
         });
@@ -60,14 +59,15 @@ render() {
         google={this.props.google}
         zoom={13}
         initialCenter={{
-            lat: 30.2672,
-            lng: -97.7431
+            lat: this.props.home.lat,
+            lng: this.props.home.lng
           }}
       >
         <Marker
           onClick={this.onMarkerClick}
-          title={'Current location'}
-          name={'Current location'}
+          title={'Home'}
+          name={'Home'}
+
         />
         {this.state.markers.map(item => {
           return (
@@ -90,7 +90,9 @@ render() {
             </div>
         </InfoWindow>
       </Map>
-      <HomeSetModal />
+      <HomeSetModal
+        userId={this.props.user.id}
+      />
     </div>
     );
   }

@@ -32,7 +32,13 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     default: "orange500"
-  }
+  },
+  position: [
+    {
+      lat: { type: String, required: true },
+      lng: { type: String, required: true }
+    }
+  ]
 });
 
 // This pre "save" handler will be called before each time the user is saved.

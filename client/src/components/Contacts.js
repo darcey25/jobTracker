@@ -148,6 +148,7 @@ class Contacts extends Component {
           leftIcon={<CommunicationEmail color={indigo500} />}
           primaryText={<LocationSearchInput id={this.state.id}
           style={style}
+          purpose={'setMarker'}
          />}
     //       primaryText={<TextField
     // 	style={style}
