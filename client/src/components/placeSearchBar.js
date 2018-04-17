@@ -1,10 +1,14 @@
-import React from 'react'
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import React, { Component } from 'react';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import axios from 'axios';
 
-class LocationSearchInput extends React.Component {
+class LocationSearchInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { address: '' }
+    this.state = {
+      address: '',
+      id: this.props.id
+    }
   }
 
   handleChange = (address) => {
@@ -14,7 +18,16 @@ class LocationSearchInput extends React.Component {
   handleSelect = (address) => {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
+      .then(latLng => {
+        console.log('Success', latLng);
+        // UpdateInfo = id => {
+        //   axios.patch('/api/newjob/' + id, {
+        //      position: {latLng}
+        //   })
+        //   .then(res=> res.json())
+        //   .catch(err=> console.log(err));
+        // }
+      })
       .catch(error => console.error('Error', error))
   }
 
