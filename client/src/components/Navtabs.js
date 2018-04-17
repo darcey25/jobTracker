@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 // import Slider from 'material-ui/Slider';
+import SmallCard from './SmallCard';
 
 const styles = {
   headline: {
@@ -14,7 +15,6 @@ const styles = {
   }
 
 };
-
 
 const TabsExampleSimple = () => (
   <div>

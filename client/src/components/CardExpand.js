@@ -11,6 +11,9 @@ import Info from './Info';
 import Calendar from './Calendar';
 import Contacts from './Contacts';
 import Notes from './Notes';
+import SetStage from './SetStage';
+
+
 
 class CardExpand extends Component {
   state = {
@@ -24,7 +27,7 @@ class CardExpand extends Component {
   };
 
   componentDidMount() {
-    this.setState({pickedTab: <Info id={this.state.id} companyName={this.state.companyName} jobTitle={this.state.jobTitle} info={this.state.info}/>})
+    this.setState({pickedTab: <Info id={this.state.id} info={this.state.info}/>})
   }
 
   // loadCards = () => {
@@ -54,7 +57,7 @@ class CardExpand extends Component {
   //   .then(res=> res.json())
   //   .catch(err=> console.log(err));
 
-  render(){
+  render(){ 
     let Active = this.state.pickedTab;
     const style = {
       paperMenu: {
@@ -81,6 +84,9 @@ class CardExpand extends Component {
     };
     return (
       <div>
+        <SetStage
+        id = {this.state.id}
+        handleStage = {this.props.handleStage}/>
         <h1>{this.state.companyName} - {this.state.jobTitle} </h1>
         <Divider />
         <div className="main">
@@ -102,28 +108,6 @@ class CardExpand extends Component {
           </div>
         </Paper>
         </div>
-            <br />
-              <div>
-              <FlatButton
-                label="Cancel"
-                secondary={true}
-                //handle close
-                onClick={this.handleClose}
-                style={{
-                  float: 'right'
-                }}
-              />
-              <FlatButton
-                label="Submit"
-                secondary={true}
-                onClick={this.handleClose}
-                type="submit"
-                className="submit"
-                style={{
-                  float: 'right'
-                }}
-              />
-            </div>
       </div>
     );
   }

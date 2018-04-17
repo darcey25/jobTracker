@@ -5,9 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import './style.css'
 import Dialog from 'material-ui/Dialog';
-import CardExpand from './CardExpand';
-
-
+import CardExpand from './CardExpand'
 
 
 class SmallCard extends Component{
@@ -15,6 +13,7 @@ class SmallCard extends Component{
     cardData: [],
     open: false,
     currentSelectData: [],
+    stage: null,
   };
 
 componentDidMount() {
@@ -25,27 +24,51 @@ loadCards = () => {
   axios.get('/api/newjob').then(res=>
     this.setState({cardData: res.data})
     )
-}
+};
+
 
 deleteJob = id => {
   axios.delete('/api/newjob/' + id)
   .then(res=>
   this.loadCards())
   .catch(err => console.log(err));
-}
+
+};
+
+handleStage = (event) => {
+    const value = event.target.innerHTML;
+    console.log(value);
+    this.setState({
+      stage: value
+    });
+  };
+
 
 handleOpen = (data) => {
     this.setState({currentSelectData: data})
     this.setState({open: true});
-}
+};
 
 handleClose = () => {
     this.setState({open: false});
-}
+};
+
 
 
 render(){
-
+  const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />,
+  ];
   return(
   <div
     style={{
@@ -58,7 +81,6 @@ render(){
       return(
         <Card key={index}
           className="jobCard"
-          onClick={this.handleOpen}
           style={{
             margin: "8px",
             backgroundColor: item.cardColor
@@ -98,7 +120,10 @@ render(){
                     float: "right"
                   }}
                   className="material-icons">delete</FontIcon>
+
               </FlatButton>
+
+              
             </CardActions>
           </Card>
           );
@@ -112,8 +137,7 @@ render(){
           >
             <CardExpand
             cardData = {this.state.currentSelectData}
-            />
-
+            handleStage={this.handleStage}/>
           </Dialog>
         </div>
   </div>

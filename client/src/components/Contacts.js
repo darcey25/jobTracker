@@ -68,54 +68,54 @@ class Contacts extends Component {
 
 
   render(){
-  	const style = {
-  	marginLeft: 20,
-  	};
+    const style = {
+    marginLeft: 20,
+    };
     return(
   <div>
-  	<Subheader>Contacts</Subheader>
-  	<form>
+    <Subheader>Contacts</Subheader>
+    <form>
     <List>
       <ListItem
         leftIcon={<AccountCircle color={indigo500} />}
         primaryText={<TextField 
-	    	style={style} 
-	    	hintText="Name" 
-	    	fullWidth={true}
-	    	id="text-field-controlled"
-	    	name="name"
-	    	value={this.state.name}
-	    	onChange={this.handleChange}
-	    />}
+        style={style} 
+        hintText="Name" 
+        fullWidth={true}
+        id="text-field-controlled"
+        name="name"
+        value={this.state.name}
+        onChange={this.handleChange}
+      />}
         primaryTogglesNestedList={true}
         onNestedListToggle={this.handleNestedListToggle}
         nestedItems={[
-	      <ListItem
-	        insetChildren={true}
-	        leftIcon={<CommunicationCall color={indigo500} />}
-	        primaryText={<TextField 
-	    	style={style} 
-	    	hintText="Phone number" 
-	    	fullWidth={true}
-	    	id="text-field-controlled"
-	    	name="phoneNumber"
-	    	value={this.state.phoneNumber}
-	    	onChange={this.handleChange}
-	    />}
-	      />,
-	      <ListItem
-	        leftIcon={<CommunicationEmail color={indigo500} />}
-	        primaryText={<TextField 
-			style={style} 
-			hintText="Email address" 
-			fullWidth={true}
-			id="text-field-controlled"
-			name="email"
-			value={this.state.email}
-			onChange={this.handleChange}
-		/>}
-	      />
-	    ]}
+        <ListItem
+          insetChildren={true}
+          leftIcon={<CommunicationCall color={indigo500} />}
+          primaryText={<TextField 
+        style={style} 
+        hintText="Phone number" 
+        fullWidth={true}
+        id="text-field-controlled"
+        name="phoneNumber"
+        value={this.state.phoneNumber}
+        onChange={this.handleChange}
+      />}
+        />,
+        <ListItem
+          leftIcon={<CommunicationEmail color={indigo500} />}
+          primaryText={<TextField 
+      style={style} 
+      hintText="Email address" 
+      fullWidth={true}
+      id="text-field-controlled"
+      name="email"
+      value={this.state.email}
+      onChange={this.handleChange}
+    />}
+        />
+      ]}
       />
     </List>
     <FlatButton
