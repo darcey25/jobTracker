@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardHeader} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import './style.css'
@@ -47,19 +47,7 @@ handleClose = () => {
 
 
 render(){
-  const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onClick={this.handleClose}
-      />,
-  ];
+
   return(
   <div
     style={{
@@ -114,7 +102,7 @@ render(){
 
               </FlatButton>
 
-              
+
             </CardActions>
           </Card>
           );
