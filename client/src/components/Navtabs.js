@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import Slider from 'material-ui/Slider';
+// import Slider from 'material-ui/Slider';
 import './style.css'
 
 class NavTabs extends Component {

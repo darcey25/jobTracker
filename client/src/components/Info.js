@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios';
-import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 
 class Info extends Component {
