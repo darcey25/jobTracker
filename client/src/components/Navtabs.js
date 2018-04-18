@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import Slider from 'material-ui/Slider';
 import './style.css'
 
 class NavTabs extends Component {
@@ -10,7 +9,6 @@ state = {
 };
 
 render(){
-  console.log("Value " + this.state.value)
   const styles = {
   headline: {
     fontSize: 24,
@@ -45,7 +43,7 @@ render(){
     </Tab>
     <Tab
       value="interview"
-      onActive={() => this.props.handleClick("interview")}
+      onActive={() => this.props.handleClick("interviewing")}
       className="TabNav"
       label="interview"
       value="interviewing"

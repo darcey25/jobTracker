@@ -2,14 +2,12 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { withUser } from '../services/withUser';
 import BigCalendar from 'react-big-calendar';
-// import events from '../events'
 import { Grid, Row } from 'react-flexbox-grid';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 
 BigCalendar.momentLocalizer(moment);
 
@@ -30,21 +28,6 @@ class Calendar extends Component {
       console.log(this.props.user);
       return;
     }
-    axios.get('/api/stuff')
-      .then(res => {
-        this.setState({
-          stuff: res.data
-        });
-        console.log(this.state.stuff);
-        console.log("Something");
-      })
-      .catch(err => {
-        // if we got an error, we'll just log it and set stuff to an empty array
-        console.log(err);
-        this.setState({
-          stuff: []
-        });
-      });
 
     this.loadDates();
   }
@@ -89,7 +72,6 @@ class Calendar extends Component {
 
   render() {
     const { user } = this.props; // get the user prop from props
-    const { stuff } = this.state; // get stuff from state
 
     return (
       <Fragment>
@@ -113,14 +95,16 @@ class Calendar extends Component {
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
-          subTitle={this.state.events.title}//figure out display
           >
           <FlatButton
           label="Close"
           primary={true}
           onClick={this.handleClose}
+          secondary={true}
+          style={{
+            float: "right"
+          }}
           />
-          
           </Dialog>
           </div>
         }

@@ -22,20 +22,6 @@ class MapPage extends Component {
     }
 
     this.loadHome();
-
-    axios.get('/api/stuff')
-      .then(res => {
-        this.setState({
-          stuff: res.data
-        });
-      })
-      .catch(err => {
-        // if we got an error, we'll just log it and set stuff to an empty array
-        console.log(err);
-        this.setState({
-          stuff: []
-        });
-      });
   }
 
   loadHome = () => {
@@ -62,7 +48,6 @@ class MapPage extends Component {
   render() {
 
     const { user } = this.props; // get the user prop from props
-    const { stuff } = this.state; // get stuff from state
 
     if (!this.props.loaded) {
       return (
