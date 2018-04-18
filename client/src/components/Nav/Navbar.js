@@ -14,11 +14,11 @@ class Navbar extends Component {
 
 
 
-  
+
   handleLogIn = () => {
     this.props.history.push('/login');
   };
-  
+
   handleLogOut = () => {
     axios.delete('/api/auth')
       .then(() => {
@@ -35,7 +35,7 @@ class Navbar extends Component {
     const { user } = this.props;
     const username = user ? user.username : null;
   return (
-  
+
     <Router>
     <div>
     <Switch>
@@ -49,7 +49,7 @@ class Navbar extends Component {
         height: "auto",
       }}
       className="AppBar"
-      title={user ? <Navtabs handleClick={this.props.handleClick}/> : "Cool App Name"}
+      title={user ? <Navtabs handleClick={this.props.handleClick}/> : "JobNote"}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
@@ -68,7 +68,7 @@ class Navbar extends Component {
         height: "auto",
       }}
       className="AppBar"
-      title="Cool App Name"
+      title="JobNote"
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
@@ -79,7 +79,7 @@ class Navbar extends Component {
         >
     </AppBar>}/>
     </Switch>
-    
+
     </div>
     </Router>
 )

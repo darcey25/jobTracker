@@ -14,12 +14,11 @@ export class MapContainer extends Component {
   };
 
   componentDidMount() {
-    this.loadLocations();
-    console.log(this.props.home);
+    this.loadLocations(this.props.user.id);
   }
 
-  loadLocations = () => {
-    axios.get('/api/locations')
+  loadLocations = (userId) => {
+    axios.get('/api/locations/'+userId)
       .then(res => {
         this.setState({
           markers: res.data

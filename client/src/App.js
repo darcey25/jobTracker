@@ -43,7 +43,7 @@ class App extends Component {
       });
   };
 
- 
+
   handleClick = (active) => {
     this.setState({activeTab: active});
    };
@@ -57,6 +57,7 @@ class App extends Component {
 
   render() {
     const { user } = this.props;
+
 
     const muiTheme = getMuiTheme({
         palette: {
@@ -72,7 +73,7 @@ class App extends Component {
             <Navbar
 
               user={user}
-              
+
               handleClick={this.handleClick}
             />
             <Switch>

@@ -14,18 +14,22 @@ class HomePage extends Component {
 
 
   render() {
-    console.log(this.props.activeTab);
     const { user } = this.props; // get the user prop from props
 
     return (
       <Fragment>
         {user &&
           <div>
-          <SmallCard activeTab = {this.props.activeTab}/>
-          <AddCardModal/>
+          <SmallCard
+            activeTab = {this.props.activeTab}
+            userId = {this.props.user.id}
+          />
+          <AddCardModal
+            userId = {this.props.user.id}
+          />
         </div>
         }
-        
+
         {!user &&
           <div
             style={{

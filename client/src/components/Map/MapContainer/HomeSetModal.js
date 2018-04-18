@@ -46,9 +46,9 @@ handleFormSubmit = (event) => {
         style = {{
             margin: 0,
             top: 'auto',
-            right: 20,
+            left: 20,
             bottom: 20,
-            left: 'auto',
+            right: 'auto',
             position: 'fixed',
             zIndex: 999
         }}

@@ -119,6 +119,17 @@ router.route('/newjob')
 
   });
 
+  router.route('/job/:userId')
+  .get((req, res)=>{
+    db.NewJob.find({ userId: req.params.userId })
+    .then(dbNewJob=>{
+      res.json(dbNewJob);
+    })
+    .catch(err=> res.status(422).json(err));
+        // console.log(res);
+
+  });
+
   router.route('/newjob/:id')
 
   .delete((req, res)=>{
@@ -155,6 +166,17 @@ router.route('/newjob/:id')
 router.route('/locations')
 .get((req, res)=>{
   db.NewJob.find()
+  .then(dbNewJob=>{
+    res.json(dbNewJob);
+  })
+  .catch(err=> res.status(422).json(err));
+      // console.log(res);
+
+});
+
+router.route('/locations/:userId')
+.get((req, res)=>{
+  db.NewJob.find({ userId: req.params.userId })
   .then(dbNewJob=>{
     res.json(dbNewJob);
   })

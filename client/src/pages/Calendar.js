@@ -26,10 +26,10 @@ class Calendar extends Component {
       return;
     }
 
-    this.loadDates();
+    this.loadDates(this.props.user.id);
   }
-  loadDates = () =>{
-    axios.get('/api/locations')
+  loadDates = (userId) =>{
+    axios.get('/api/locations/'+userId)
       .then(res => {
         let id = 0
         let tempEvents=[];

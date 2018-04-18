@@ -48,6 +48,7 @@ handleFormSubmit = (event) => {
   const titleColor = this.state.titleColor;
   const companyName = this.state.companyName;
   const jobTitle = this.state.jobTitle;
+  const userId = this.props.userId;
   console.log(companyName);
   console.log(jobTitle);
   if (this.state.companyName && this.state.jobTitle){
@@ -55,7 +56,8 @@ handleFormSubmit = (event) => {
       companyName,
       jobTitle,
       cardColor,
-      titleColor
+      titleColor,
+      userId
     })
     .then(res=> window.location.reload())
     .catch(err=> console.log(err));
