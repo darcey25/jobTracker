@@ -34,7 +34,7 @@ handleStage = (stage, id) => {
       stage: stage
     })
     .then(res=> res.json())
-    .catch(err=> console.log(err)); 
+    .catch(err=> console.log(err));
     this.props.loadCards();
   };
 

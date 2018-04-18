@@ -23,10 +23,9 @@ class Calendar extends Component {
     // only try loading stuff if the user is logged in.
     if (!this.props.user) {
       console.log("No user detected");
-      console.log(this.props);
-      console.log(this.props.user);
       return;
     }
+
     this.loadDates();
   }
   loadDates = () =>{
@@ -36,13 +35,16 @@ class Calendar extends Component {
         let tempEvents=[];
         let dateArray = res.data;
         dateArray.map(item=>{
+
           if(item.dateInfo[0] !== undefined){
+            let dateTemp = new Date(item.dateInfo[0].date)
+            let firstTemp = moment(dateTemp).add(5, 'hours')
           tempEvents.push(
             {
               id: id,
               title: item.dateInfo[0].dateDesc,
-              start: new Date(item.dateInfo[0].date),
-              end: new Date(item.dateInfo[0].date),
+              start: new Date(firstTemp),
+              end: new Date(firstTemp),
             }
           )
           id++
@@ -74,12 +76,14 @@ class Calendar extends Component {
               <Row>
                 <BigCalendar
                   events={this.state.events}
-                  views={['month', 'day', 'agenda']}
+                  views={['month', 'day']}
                   step={30}
                   showMultiDayTimes
                   defaultDate={new Date()}
                   className = "Calendar"
                   onSelectEvent={event =>this.handleOpen(event.title)}
+                  startAccessor='start'
+                  endAccessor='end'
                 />
               </Row>
             </Grid>
