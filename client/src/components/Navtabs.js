@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import Slider from 'material-ui/Slider';
 import './style.css'
 
-const styles = {
+class NavTabs extends Component {
+
+render(){
+  const styles = {
   headline: {
     fontSize: 24,
     paddingTop: 16,
@@ -13,41 +15,58 @@ const styles = {
   title: {
     margin: 0,
   }
+  };
 
-};
-
-const TabsExampleSimple = () => (
+  return(
   <div>
   <h3 style={styles.title}>Cool App Name</h3>
-  <Tabs >
+  <Tabs>
     <Tab
-
-       className="TabNav"
-    label="to apply">
+      value="apply"
+      onActive={() => this.props.handleClick("apply")}
+      className="TabNav"
+      label="to apply">
 
     </Tab>
     <Tab
+      value="applied"
+      onActive={() => this.props.handleClick("applied")}
       className="TabNav"
-      label="applied" >
+      label="applied"
+      value="applied"
+      onClick={this.props.handleFilter} >
 
     </Tab>
     <Tab
+      value="interview"
+      onActive={() => this.props.handleClick("interviewing")}
       className="TabNav"
-      label="interview" >
+      label="interview"
+      value="interviewing"
+      onClick={this.props.handleFilter} >
 
     </Tab>
     <Tab
+      value="offer"
+      onActive={() => this.props.handleClick("offer")}
       className="TabNav"
-      label="offer" >
+      label="offer"
+      value="offer"
+      onClick={this.props.handleFilter} >
 
     </Tab>
     <Tab
+      value="rejected"
+      onActive={() => this.props.handleClick("rejected")}
       className="TabNav"
-      label="rejected">
+      label="rejected"
+      value="rejected"
+      onClick={this.props.handleFilter}>
 
     </Tab>
   </Tabs>
   </div>
 );
-
-export default TabsExampleSimple;
+}
+}
+export default NavTabs;

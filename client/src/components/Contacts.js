@@ -8,7 +8,6 @@ import CommunicationCall from 'material-ui/svg-icons/communication/call';
 import CommunicationEmail from 'material-ui/svg-icons/communication/email';
 import Location from 'material-ui/svg-icons/communication/location-on';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
-import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import LocationSearchInput from "./LocationSearchInput.js"
 
@@ -17,7 +16,6 @@ class Contacts extends Component {
     name: "",
     phoneNumber: "",
     email: "",
-    address: "",
     id: this.props.id,
     open: false,
   };
@@ -26,7 +24,6 @@ class Contacts extends Component {
     this.loadName();
     this.loadEmail();
     this.loadNumber();
-    this.loadAddress();
   }
 
   loadName = () => {
@@ -62,17 +59,6 @@ class Contacts extends Component {
       // this.setState({info: res.data.info})
     // ).then(this.setState({info: this.state.cardData.info}))
   };
-  loadAddress = () => {
-    axios.get('/api/newjob/' + this.props.id).then(res=> {
-    	if(res.data.contacts[0] === undefined) {
-      		this.setState({address: ""})
-    	} else {
-    		this.setState({address: res.data.contacts[0].address })
-    	}
-    });
-      // this.setState({info: res.data.info})
-    // ).then(this.setState({info: this.state.cardData.info}))
-  };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -83,7 +69,7 @@ class Contacts extends Component {
 
   UpdateInfo = id => {
     axios.patch('/api/newjob/' + id, {
-       contacts: {name: this.state.name, phoneNumber: this.state.phoneNumber, email: this.state.email, address:this.state.address}
+       contacts: {name: this.state.name, phoneNumber: this.state.phoneNumber, email: this.state.email}
     })
     .then(res=> res.json())
     .catch(err=> console.log(err));
@@ -122,6 +108,7 @@ class Contacts extends Component {
 	     	innerDivStyle={{marginLeft: 0}}
 	        leftIcon={<CommunicationCall color={indigo500} />}
 	        primaryText={<TextField
+	        underlineStyle={{width: 392}}
 	    	style={style}
 	    	hintText="Phone number"
 	    	fullWidth={true}
@@ -135,15 +122,16 @@ class Contacts extends Component {
 	      	innerDivStyle={{marginLeft: 0}}
 	        leftIcon={<CommunicationEmail color={indigo500} />}
 	        primaryText={<TextField
+	        underlineStyle={{width: 392}}
 			style={style}
 			hintText="Email address"
 			fullWidth={true}
 			id="text-field-controlled"
-			name="address"
+			name="email"
 			value={this.state.email}
 			onChange={this.handleChange}
 		/>}
-  />,
+  		/>,
         <ListItem
           innerDivStyle={{marginLeft: 0}}
           leftIcon={<Location color={indigo500} />}

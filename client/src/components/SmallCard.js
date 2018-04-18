@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardHeader} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import './style.css'
@@ -13,7 +13,6 @@ class SmallCard extends Component{
     cardData: [],
     open: false,
     currentSelectData: [],
-    stage: null,
   };
 
 componentDidMount() {
@@ -26,23 +25,12 @@ loadCards = () => {
     )
 };
 
-
 deleteJob = id => {
   axios.delete('/api/newjob/' + id)
   .then(res=>
   this.loadCards())
   .catch(err => console.log(err));
-
 };
-
-handleStage = (event) => {
-    const value = event.target.innerHTML;
-    console.log(value);
-    this.setState({
-      stage: value
-    });
-  };
-
 
 handleOpen = (data) => {
     this.setState({currentSelectData: data})
@@ -53,22 +41,11 @@ handleClose = () => {
     this.setState({open: false});
 };
 
-
-
 render(){
-  const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onClick={this.handleClose}
-      />,
-  ];
+
+  let activeCard  = this.state.cardData.filter(val => {
+   return val.stage === this.props.activeTab
+    });
   return(
   <div
     style={{
@@ -76,8 +53,7 @@ render(){
       flexWrap: "wrap"
     }}
     >
-    {this.state.cardData.map((item, index)=>{
-
+    {activeCard.map((item, index)=>{
       return(
         <Card key={index}
           className="jobCard"
@@ -120,10 +96,8 @@ render(){
                     float: "right"
                   }}
                   className="material-icons">delete</FontIcon>
+              </FlatButton>              
 
-              </FlatButton>
-
-              
             </CardActions>
           </Card>
           );
@@ -137,7 +111,7 @@ render(){
           >
             <CardExpand
             cardData = {this.state.currentSelectData}
-            handleStage={this.handleStage}/>
+            loadCards = {this.loadCards}/>
           </Dialog>
         </div>
   </div>
