@@ -7,7 +7,11 @@ class MapPage extends Component {
   state = {
     stuff: null,
     locations: [],
-    home: {}
+    homeSet: false,
+    home: {
+      "lat": 30.2672,
+      "lng": -97.7431
+    }
   }
 
   componentDidMount() {
@@ -24,8 +28,6 @@ class MapPage extends Component {
         this.setState({
           stuff: res.data
         });
-        console.log(this.state.stuff);
-        console.log("Something");
       })
       .catch(err => {
         // if we got an error, we'll just log it and set stuff to an empty array
@@ -39,10 +41,12 @@ class MapPage extends Component {
   loadHome = () => {
     axios.get('api/user/' + this.props.user.id)
       .then(res => {
-        console.log(res.data.position[0])
-        this.setState({
-          home: res.data.position[0]
-        });
+        this.setState({ homeSet: res.data.homeSet });
+        if (res.data.position[0].lat !== "") {
+          this.setState({
+            home: res.data.position[0]
+          });
+        }
       })
       .catch(err => {
         console.log(err);
@@ -67,6 +71,7 @@ class MapPage extends Component {
               <LoadingContainer
                 user={this.props.user}
                 home={this.state.home}
+                homeSet={this.state.homeSet}
                />
             </div>
           }

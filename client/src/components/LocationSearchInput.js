@@ -31,7 +31,8 @@ class LocationSearchInput extends Component {
         }
         else if (this.props.purpose === 'setHome') {
           axios.patch('/api/user/' + this.props.userId, {
-            position: latLng
+            position: latLng,
+            homeSet: true
           })
         }
       })

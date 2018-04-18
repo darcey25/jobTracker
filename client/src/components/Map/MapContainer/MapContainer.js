@@ -14,10 +14,7 @@ export class MapContainer extends Component {
   };
 
   componentDidMount() {
-
     this.loadLocations();
-    console.log(this.state.home);
-
   }
 
   loadLocations = () => {
@@ -52,6 +49,19 @@ export class MapContainer extends Component {
   };
 
 render() {
+
+  const homeSet = this.props.homeSet;
+  const homeSetModal = homeSet ? (
+    <HomeSetModal
+      userId={this.props.user.id}
+      modalOpen={false}
+    />
+  ) : (
+    <HomeSetModal
+      userId={this.props.user.id}
+      modalOpen={true}
+    />
+  );
 
     return (
     <div>
@@ -90,9 +100,7 @@ render() {
             </div>
         </InfoWindow>
       </Map>
-      <HomeSetModal
-        userId={this.props.user.id}
-      />
+      {homeSetModal}
     </div>
     );
   }

@@ -33,6 +33,11 @@ const UserSchema = new Schema({
     required: true,
     default: "orange500"
   },
+  homeSet: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   position: [
     {
       lat: { type: String, required: true },
