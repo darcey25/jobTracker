@@ -19,7 +19,7 @@ render(){
 
   return(
   <div>
-  <h3 style={styles.title}>Cool App Name</h3>
+  <h3 style={styles.title}>JobNote</h3>
   <Tabs>
     <Tab
       value="apply"

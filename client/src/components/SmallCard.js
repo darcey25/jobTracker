@@ -16,11 +16,11 @@ class SmallCard extends Component{
   };
 
 componentDidMount() {
-  this.loadCards();
+  this.loadCards(this.props.userId);
 }
 
-loadCards = () => {
-  axios.get('/api/newjob').then(res=>
+loadCards = (userId) => {
+  axios.get('/api/job/' + userId).then(res=>
     this.setState({cardData: res.data})
     )
 };
@@ -28,7 +28,7 @@ loadCards = () => {
 deleteJob = id => {
   axios.delete('/api/newjob/' + id)
   .then(res=>
-  this.loadCards())
+  this.loadCards(this.props.userId))
   .catch(err => console.log(err));
 };
 
@@ -96,7 +96,7 @@ render(){
                     float: "right"
                   }}
                   className="material-icons">delete</FontIcon>
-              </FlatButton>              
+              </FlatButton>
 
             </CardActions>
           </Card>

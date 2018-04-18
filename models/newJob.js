@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const NewJobSchema = new Schema({
 
+  userId: { type: String, required: true },
   companyName: { type: String, required: true },
   jobTitle: { type: String, required: true },
   stage: {type: String, required: true, default: "apply"},
