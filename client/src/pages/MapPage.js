@@ -22,20 +22,6 @@ class MapPage extends Component {
     }
 
     this.loadHome();
-
-    axios.get('/api/stuff')
-      .then(res => {
-        this.setState({
-          stuff: res.data
-        });
-      })
-      .catch(err => {
-        // if we got an error, we'll just log it and set stuff to an empty array
-        console.log(err);
-        this.setState({
-          stuff: []
-        });
-      });
   }
 
   loadHome = () => {
@@ -81,11 +67,8 @@ class MapPage extends Component {
         </Fragment>
       );
     }
-
   }
-
 }
-
 // withUser function will wrap the specified component in another component that will
 // inject the currently logged in user as a prop called "user"
 export default withUser(MapPage);

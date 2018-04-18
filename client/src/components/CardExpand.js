@@ -4,6 +4,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
+import axios from 'axios';
 import Info from './Info';
 import CalendarForm from './CalendarForm';
 import Contacts from './Contacts';
@@ -20,38 +21,26 @@ class CardExpand extends Component {
     jobTitle: this.props.cardData.jobTitle,
     notes: this.props.cardData.notes,
     pickedTab: null,
+    stage: null,
   };
 
   componentDidMount() {
     this.setState({pickedTab: <Info id={this.state.id} info={this.state.info}/>})
   }
 
-  // loadCards = () => {
-  //   axios.get('/api/newjob/' + this.props.cardData._id).then(res=>
-  //     this.setState({info: res.data.info}))
-      // this.setState({info: res.data.info})
-    // ).then(this.setState({info: this.state.cardData.info}))
-
-
-
-  // handleChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // }
+handleStage = (stage, id) => {
+    this.setState({stage:stage});
+    axios.patch('/api/newjob/' + id, {
+      stage: stage
+    })
+    .then(res=> res.json())
+    .catch(err=> console.log(err));
+    this.props.loadCards();
+  };
 
   handleClick = choice => {
     this.setState({pickedTab:choice});
   };
-
-
-  // UpdateInfo = id => {
-  //   axios.patch('/api/newjob/' + id, {
-  //     info: this.state.info
-  //   })
-  //   .then(res=> res.json())
-  //   .catch(err=> console.log(err));
 
 render(){
 
@@ -83,7 +72,7 @@ render(){
       <div>
         <SetStage
         id = {this.state.id}
-        handleStage = {this.props.handleStage}/>
+        handleStage = {this.handleStage}/>
         <h1>{this.state.companyName} - {this.state.jobTitle} </h1>
         <Divider />
         <div className="main">

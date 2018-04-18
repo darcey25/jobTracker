@@ -1,10 +1,7 @@
-import axios from 'axios';
 import React, { Component } from 'react';
-// import AddJobForm from './AddJobForm';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
 import LocationSearchInput from "../../LocationSearchInput.js";
 
 class HomeSetModal extends Component {
