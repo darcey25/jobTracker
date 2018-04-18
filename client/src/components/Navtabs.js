@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
+import './style.css'
 
 const styles = {
   headline: {
@@ -15,25 +16,35 @@ const styles = {
 
 };
 
-
 const TabsExampleSimple = () => (
   <div>
   <h3 style={styles.title}>Cool App Name</h3>
   <Tabs >
-    <Tab label="need to apply">
-      
+    <Tab
+
+       className="TabNav"
+    label="to apply">
+
     </Tab>
-    <Tab label="applied" >
-      
+    <Tab
+      className="TabNav"
+      label="applied" >
+
     </Tab>
-    <Tab label="interviewing" >
-     
+    <Tab
+      className="TabNav"
+      label="interview" >
+
     </Tab>
-    <Tab label="offer" >
-     
+    <Tab
+      className="TabNav"
+      label="offer" >
+
     </Tab>
-    <Tab label="rejected">
-      
+    <Tab
+      className="TabNav"
+      label="rejected">
+
     </Tab>
   </Tabs>
   </div>

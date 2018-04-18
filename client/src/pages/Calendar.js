@@ -26,7 +26,6 @@ class Calendar extends Component {
       console.log(this.props.user);
       return;
     }
-
     axios.get('/api/stuff')
       .then(res => {
         this.setState({
@@ -78,7 +77,6 @@ class Calendar extends Component {
 
   render() {
     const { user } = this.props; // get the user prop from props
-    const { stuff } = this.state; // get stuff from state
 
     return (
       <Fragment>

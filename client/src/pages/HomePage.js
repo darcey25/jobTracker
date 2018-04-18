@@ -1,12 +1,11 @@
-import axios from 'axios';
 import React, { Component, Fragment } from 'react';
-import { List, ListItem } from 'material-ui/List';
+import axios from 'axios';
 import { withUser } from '../services/withUser';
 import SmallCard from '../components/SmallCard';
 import AddCardModal from '../components/AddCardModal';
+
 class HomePage extends Component {
   state = {
-    stuff: null
   }
   componentDidMount() {
     // only try loading stuff if the user is logged in.
@@ -34,23 +33,26 @@ class HomePage extends Component {
   }
   render() {
     const { user } = this.props; // get the user prop from props
-    const { stuff } = this.state; // get stuff from state
 
     return (
       <Fragment>
-        {user && stuff &&
+        {user &&
           <div>
-            Welcome back, {user.username}!
-
-          <List>
-           {stuff.map((s, i) => <ListItem key={i} primaryText={s} />)}
-          </List>
           <SmallCard/>
           <AddCardModal/>
-        </div>
+          </div>
         }
+        
         {!user &&
-          <div>Hey! I don't recognize you! Register and log in using the link above</div>
+          <div
+            style={{
+              textAlign: "center",
+              margin: "auto 20px",
+              paddingTop: "30px",
+              fontFamily: "Lobster, cursive",
+              fontSize: "20px"
+            }}
+            >Hey! I don't recognize you! Register and log in using the link above</div>
         }
       </Fragment>
     );

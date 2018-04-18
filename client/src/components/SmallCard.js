@@ -8,13 +8,12 @@ import Dialog from 'material-ui/Dialog';
 import CardExpand from './CardExpand'
 
 
-
-
 class SmallCard extends Component{
   state = {
     cardData: [],
     open: false,
     currentSelectData: [],
+    stage: null,
   };
 
 componentDidMount() {
@@ -27,13 +26,23 @@ loadCards = () => {
     )
 };
 
+
 deleteJob = id => {
   axios.delete('/api/newjob/' + id)
   .then(res=>
   this.loadCards())
   .catch(err => console.log(err));
 
-}
+};
+
+handleStage = (event) => {
+    const value = event.target.innerHTML;
+    console.log(value);
+    this.setState({
+      stage: value
+    });
+  };
+
 
 handleOpen = (data) => {
     this.setState({currentSelectData: data})
@@ -127,7 +136,8 @@ render(){
             onRequestClose={this.handleClose}
           >
             <CardExpand
-            cardData = {this.state.currentSelectData}/>
+            cardData = {this.state.currentSelectData}
+            handleStage={this.handleStage}/>
           </Dialog>
         </div>
   </div>

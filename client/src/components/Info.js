@@ -47,6 +47,7 @@ class Info extends Component {
               <TextField
               id="text-field-controlled"
               name="info"
+              hintText= "Add job description/information"
               value={this.state.info}
               onChange={this.handleChange}
               fullWidth={true}
