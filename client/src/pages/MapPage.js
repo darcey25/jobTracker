@@ -58,6 +58,7 @@ class MapPage extends Component {
   render() {
 
     const { user } = this.props; // get the user prop from props
+    const { stuff } = this.state; // get stuff from state
 
     if (!this.props.loaded) {
       return (
@@ -76,11 +77,8 @@ class MapPage extends Component {
         </Fragment>
       );
     }
-
   }
-
 }
-
 // withUser function will wrap the specified component in another component that will
 // inject the currently logged in user as a prop called "user"
 export default withUser(MapPage);

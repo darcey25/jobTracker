@@ -7,7 +7,7 @@ import Navtabs from './Navtabs';
 import LoginButton from './LoginButton';
 import LoginMenu from './LoginMenu';
 import {Tabs, Tab} from 'material-ui'
-
+import NavTabs from './Navtabs';
 import { update } from '../services/withUser';
 
 const styles = {
@@ -41,7 +41,8 @@ const Navbar = (props) => {
     <Route path="/home" render={() => <div>Home</div>}/>
     <AppBar style={styles.nav}
       titleStyle= {styles.title}
-      title={<Navtabs />}
+      handleFilter = {this.props.handleFilter}
+      title={<NavTabs handleFilter = {this.props.handleFilter} />}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>

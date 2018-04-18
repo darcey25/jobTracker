@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import { List, ListItem } from 'material-ui/List';
 import { withUser } from '../services/withUser';
 import SmallCard from '../components/SmallCard';
 import AddCardModal from '../components/AddCardModal';
@@ -33,14 +34,18 @@ class HomePage extends Component {
   }
   render() {
     const { user } = this.props; // get the user prop from props
+    const { stuff } = this.state; // get stuff from state
 
     return (
       <Fragment>
-        {user &&
+        {user && stuff &&
           <div>
+          <List>
+           {stuff.map((s, i) => <ListItem key={i} primaryText={s} />)}
+          </List>
           <SmallCard/>
           <AddCardModal/>
-          </div>
+        </div>
         }
         
         {!user &&

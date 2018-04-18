@@ -7,6 +7,9 @@ import { Grid, Row } from 'react-flexbox-grid';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 BigCalendar.momentLocalizer(moment);
 
@@ -15,6 +18,7 @@ class Calendar extends Component {
 
   state = {
     stuff: null,
+    open: false,
     events: []
   }
 
@@ -75,8 +79,17 @@ class Calendar extends Component {
       });
     }
 
+  handleOpen = () => {
+    this.setState({open: true});
+  }
+
+  handleClose = () => {
+    this.setState({open: false});
+  }
+
   render() {
     const { user } = this.props; // get the user prop from props
+    const { stuff } = this.state; // get stuff from state
 
     return (
       <Fragment>
@@ -91,10 +104,24 @@ class Calendar extends Component {
                   showMultiDayTimes
                   defaultDate={new Date()}
                   className = "Calendar"
-                  onSelectEvent={event => alert(event.title)}
+                  onSelectEvent={this.handleOpen}
                 />
               </Row>
             </Grid>
+          <Dialog
+          title="Calendar Event"
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+          subTitle={this.state.events.title}//figure out display
+          >
+          <FlatButton
+          label="Close"
+          primary={true}
+          onClick={this.handleClose}
+          />
+          
+          </Dialog>
           </div>
         }
         {!user &&

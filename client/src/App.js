@@ -21,6 +21,7 @@ class App extends Component {
   state = {
     primaryColor: "",
     accentColor: "",
+    filter: "",
   };
 
   componentDidMount() {
@@ -42,8 +43,13 @@ class App extends Component {
           update(null);
         }
       });
-  }
-
+  };
+  handleFilter = (event) => {
+    const value = event.target.innerHTML;
+    this.setState({
+      filter: value
+    });
+  };
 
   render() {
     const { user } = this.props;
@@ -56,33 +62,16 @@ class App extends Component {
       });
 
 
-  //   Code to change themes
-  // var muiTheme;
-  //   if(this.state.primaryColor === ""){
-  //    muiTheme = getMuiTheme({
-  //     palette: {
-  //       primary1Color: lightBlue500,
-  //       accent1Color: orange500,
-  //     },
-  //   });
-  // }else{
-  //  muiTheme = getMuiTheme({
-  //   palette: {
-  //     primary1Color: this.state.primaryColor,
-  //     accent1Color: this.state.accentColor,
-  //   },
-  // });
-  // }
-
     return (
       <Router>
         <MuiThemeProvider muiTheme={muiTheme}>
           <Fragment>
             <Navbar
               user={user}
+              handleFilter = {this.handleFilter}
             />
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route handleFilter={this.handleFilter} exact path="/" component={HomePage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/create" component={CreateAccountPage} />
               <Route exact path="/map" component={MapPage} />

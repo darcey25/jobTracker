@@ -69,7 +69,7 @@ class SetStage extends Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "apply")} primaryText="Need to Apply" value = "apply" />
+            <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "apply")} primaryText="To Apply" value = "apply" />
             <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "applied")} primaryText="Applied" value = "applied" />
             <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "interviewing")} primaryText="Interviewing" value = "interviewing"/>
             <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "offer")} primaryText="Offer" value = "offer" />

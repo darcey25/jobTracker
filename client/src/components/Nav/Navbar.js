@@ -1,22 +1,26 @@
 import axios from 'axios';
-import React from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import  Sidedrawer from '../Sidedrawer';
 import LoginButton from '../LoginButton';
 import LoginMenu from '../LoginMenu';
-import Navtabs from '../Navtabs';
+import NavTabs from '../Navtabs';
 
 import { update } from '../../services/withUser';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-const Navbar = (props) => {
-  const { user } = props;
-  const username = user ? user.username : null;
-  const handleLogIn = () => {
-    props.history.push('/login');
+class Navbar extends Component {
+state={
+
+}
+
+
+  handleLogIn = () => {
+    this.props.history.push('/login');
   };
-  const handleLogOut = () => {
+
+  handleLogOut = () => {
     axios.delete('/api/auth')
       .then(() => {
         // unsets the currently logged in user. all components wrapped in withUser
@@ -26,8 +30,14 @@ const Navbar = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
+
+  render() {
+  const { user } = this.props;
+  const username = user ? user.username : null;
+
   return (
+  
     <Router>
     <div>
     <Switch>
@@ -41,14 +51,14 @@ const Navbar = (props) => {
         height: "auto",
       }}
       className="AppBar"
-      title={user ? <Navtabs /> : "Cool App Name"}
+      title={user ? <NavTabs handleFilter = {this.props.handleFilter} /> : "Cool App Name"}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
       }
       iconElementRight={user ?
-        <LoginMenu username={username} onLogOut={handleLogOut} />
-        : <LoginButton onClick={handleLogIn} />}
+        <LoginMenu username={username} onLogOut={this.handleLogOut} />
+        : <LoginButton onClick={this.handleLogIn} />}
         >
     </AppBar>}/>
     <Route exact path="(/login|/create|/help|/calendar)" render={() => <AppBar
@@ -66,8 +76,8 @@ const Navbar = (props) => {
         <Sidedrawer/>
       }
       iconElementRight={user ?
-        <LoginMenu username={username} onLogOut={handleLogOut} />
-        : <LoginButton onClick={handleLogIn} />}
+        <LoginMenu username={username} onLogOut={this.handleLogOut} />
+        : <LoginButton onClick={this.handleLogIn} />}
         >
     </AppBar>}/>
     </Switch>
@@ -77,5 +87,5 @@ const Navbar = (props) => {
 
   )
 };
-
+}
 export default withRouter(Navbar);

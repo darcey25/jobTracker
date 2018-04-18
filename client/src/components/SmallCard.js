@@ -37,7 +37,6 @@ deleteJob = id => {
 
 handleStage = (event) => {
     const value = event.target.innerHTML;
-    console.log(value);
     this.setState({
       stage: value
     });
@@ -56,19 +55,6 @@ handleClose = () => {
 
 
 render(){
-  const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onClick={this.handleClose}
-      />,
-  ];
   return(
   <div
     style={{
