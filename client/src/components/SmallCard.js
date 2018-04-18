@@ -46,7 +46,6 @@ render(){
   let activeCard  = this.state.cardData.filter(val => {
    return val.stage === this.props.activeTab
     });
-
   return(
   <div
     style={{

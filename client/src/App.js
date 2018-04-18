@@ -21,7 +21,6 @@ class App extends Component {
     primaryColor: "",
     accentColor: "",
     activeTab: "apply",
-    value: ""
   };
 
   componentDidMount() {
@@ -49,6 +48,7 @@ class App extends Component {
     this.setState({activeTab: active});
    };
 
+
   handleChange = (value) => {
     this.setState({
       value: value,
@@ -70,10 +70,9 @@ class App extends Component {
         <MuiThemeProvider muiTheme={muiTheme}>
           <Fragment>
             <Navbar
-              activeTab={this.state.activeTab}
-              value={this.state.value}
+
               user={user}
-              handleChange={this.handleChange}
+              
               handleClick={this.handleClick}
             />
             <Switch>

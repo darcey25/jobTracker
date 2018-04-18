@@ -4,10 +4,6 @@ import './style.css'
 
 class NavTabs extends Component {
 
-state = {
-  value: this.props.value
-};
-
 render(){
   const styles = {
   headline: {

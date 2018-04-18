@@ -43,6 +43,7 @@ handleStage = (stage, id) => {
   };
 
 render(){
+
     let Active = this.state.pickedTab;
     const style = {
       paperMenu: {

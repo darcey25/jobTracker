@@ -4,9 +4,7 @@ import SmallCard from '../components/SmallCard';
 import AddCardModal from '../components/AddCardModal';
 
 class HomePage extends Component {
-  state = {
 
-  }
   componentDidMount() {
     // only try loading stuff if the user is logged in.
     if (!this.props.user) {
@@ -14,7 +12,9 @@ class HomePage extends Component {
     }
  }
 
+
   render() {
+    console.log(this.props.activeTab);
     const { user } = this.props; // get the user prop from props
 
     return (

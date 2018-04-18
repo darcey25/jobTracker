@@ -11,10 +11,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class Navbar extends Component {
 
-  state = {
-    activeTab: this.props.activeTab,
-    value: this.props.value
-  };
+
 
 
   
@@ -42,7 +39,7 @@ class Navbar extends Component {
     <Router>
     <div>
     <Switch>
-    <Route exact path="(/|/map)"  render={() => <AppBar
+    <Route exact path="(/)"  render={() => <AppBar
       style={{
         fontFamily: 'Lobster, cursive',
         color: 'white',
@@ -52,7 +49,7 @@ class Navbar extends Component {
         height: "auto",
       }}
       className="AppBar"
-      title={user ? <Navtabs handleChange={this.props.handleChange} value={this.state.value} handleClick={this.props.handleClick}/> : "Cool App Name"}
+      title={user ? <Navtabs handleClick={this.props.handleClick}/> : "Cool App Name"}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
@@ -62,7 +59,7 @@ class Navbar extends Component {
         : <LoginButton onClick={this.handleLogIn} />}
         >
     </AppBar>}/>
-    <Route exact path="(/login|/create|/help|/calendar)" render={() => <AppBar
+    <Route exact path="(/login|/create|/help|/calendar|/map)" render={() => <AppBar
       style={{
         fontFamily: 'Lobster, cursive',
         color: 'white',
