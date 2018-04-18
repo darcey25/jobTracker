@@ -79,6 +79,7 @@ class Calendar extends Component {
   }
   render() {
     const { user } = this.props; // get the user prop from props
+
     return (
       <Fragment>
         {user &&

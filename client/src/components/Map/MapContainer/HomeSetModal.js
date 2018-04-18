@@ -5,14 +5,13 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
-import LocationSearchInput from "../../LocationSearchInput.js"
+import LocationSearchInput from "../../LocationSearchInput.js";
 
 class HomeSetModal extends Component {
   state = {
     address: "",
-    open: false,
+    open: this.props.modalOpen,
   }
-
 
   handleOpen = () => {
     this.setState({open: true});
@@ -20,6 +19,7 @@ class HomeSetModal extends Component {
 
   handleClose = () => {
     this.setState({open: false});
+    window.location.reload();
   }
 
   handleInputChange = event => {
@@ -35,16 +35,6 @@ handleFormSubmit = (event) => {
 
   const address = this.state.address;
   console.log(address);
-  // if (this.state.address && this.state.jobTitle){
-  //   axios.post('/api/newjob', {
-  //     companyName,
-  //     jobTitle,
-  //     cardColor,
-  //     titleColor
-  //   })
-  //   .then(res=> window.location.reload())
-  //   .catch(err=> console.log(err));
-  // }
 }
   render() {
 

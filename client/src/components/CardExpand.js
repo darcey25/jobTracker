@@ -11,6 +11,7 @@ import Info from './Info';
 import CalendarForm from './CalendarForm';
 import Contacts from './Contacts';
 import Notes from './Notes';
+import SetStage from './SetStage';
 
 
 
@@ -55,9 +56,7 @@ class CardExpand extends Component {
   //   .then(res=> res.json())
   //   .catch(err=> console.log(err));
 
-  render(){
-
-
+render(){
 
     let Active = this.state.pickedTab;
     const style = {
@@ -85,6 +84,9 @@ class CardExpand extends Component {
     };
     return (
       <div>
+        <SetStage
+        id = {this.state.id}
+        handleStage = {this.props.handleStage}/>
         <h1>{this.state.companyName} - {this.state.jobTitle} </h1>
         <Divider />
         <div className="main">
