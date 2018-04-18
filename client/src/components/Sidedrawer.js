@@ -4,8 +4,6 @@ import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
 import {white} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
-import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
-
 
 export default class DrawerUndockedExample extends React.Component {
 

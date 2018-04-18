@@ -47,6 +47,8 @@ class CalendarForm extends Component {
   }
 
   handleChangeDate = (value) => {
+    console.log(value)
+    console.log(moment(value).format('YYYY-MM-DD'))
     this.setState({
       date: moment(value).format('YYYY-MM-DD')
     });
