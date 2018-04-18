@@ -5,7 +5,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
-import LocationSearchInput from "../../LocationSearchInput.js"
+import LocationSearchInput from "../../LocationSearchInput.js";
 
 class HomeSetModal extends Component {
   state = {
@@ -19,6 +19,7 @@ class HomeSetModal extends Component {
 
   handleClose = () => {
     this.setState({open: false});
+    window.location.reload();
   }
 
   handleInputChange = event => {
