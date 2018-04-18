@@ -42,9 +42,11 @@ handleClose = () => {
 };
 
 render(){
+
   let activeCard  = this.state.cardData.filter(val => {
    return val.stage === this.props.activeTab
     });
+
   return(
   <div
     style={{
@@ -96,6 +98,7 @@ render(){
                   }}
                   className="material-icons">delete</FontIcon>
               </FlatButton>              
+
             </CardActions>
           </Card>
           );

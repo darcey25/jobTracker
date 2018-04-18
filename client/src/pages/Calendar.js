@@ -9,17 +9,16 @@ import './Calendar.css';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+
+
 BigCalendar.momentLocalizer(moment);
-
-
 class Calendar extends Component {
-
   state = {
     stuff: null,
     open: false,
-    events: []
+    events: [],
+    selectedTitle: ""
   }
-
   componentDidMount() {
     // only try loading stuff if the user is logged in.
     if (!this.props.user) {
@@ -28,10 +27,8 @@ class Calendar extends Component {
       console.log(this.props.user);
       return;
     }
-
     this.loadDates();
   }
-
   loadDates = () =>{
     axios.get('/api/locations')
       .then(res => {
@@ -40,7 +37,6 @@ class Calendar extends Component {
         let dateArray = res.data;
         dateArray.map(item=>{
           if(item.dateInfo[0] !== undefined){
-
           tempEvents.push(
             {
               id: id,
@@ -61,15 +57,12 @@ class Calendar extends Component {
         console.log(err);
       });
     }
-
-  handleOpen = () => {
-    this.setState({open: true});
+  handleOpen = (data) => {
+    this.setState({open: true, selectedTitle: data});
   }
-
   handleClose = () => {
     this.setState({open: false});
   }
-
   render() {
     const { user } = this.props; // get the user prop from props
 
@@ -86,7 +79,7 @@ class Calendar extends Component {
                   showMultiDayTimes
                   defaultDate={new Date()}
                   className = "Calendar"
-                  onSelectEvent={this.handleOpen}
+                  onSelectEvent={event =>this.handleOpen(event.title)}
                 />
               </Row>
             </Grid>
@@ -96,13 +89,13 @@ class Calendar extends Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
           >
+            <div>{this.state.selectedTitle}</div>
           <FlatButton
           label="Close"
-          primary={true}
-          onClick={this.handleClose}
           secondary={true}
+          onClick={this.handleClose}
           style={{
-            float: "right"
+            float: 'right'
           }}
           />
           </Dialog>
@@ -115,5 +108,4 @@ class Calendar extends Component {
     );
   }
 }
-
 export default withUser(Calendar);
