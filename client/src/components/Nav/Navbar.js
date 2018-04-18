@@ -35,12 +35,10 @@ class Navbar extends Component {
   };
 
   render() {
-    console.log("hi I am in navbar");
-  console.log("activeTab " + this.state.activeTab);
-  console.log("Value " + this.state.value);
     const { user } = this.props;
     const username = user ? user.username : null;
   return (
+  
     <Router>
     <div>
     <Switch>
@@ -87,9 +85,7 @@ class Navbar extends Component {
     
     </div>
     </Router>
-
-  )
-}
+)
 };
-
+}
 export default withRouter(Navbar);

@@ -10,6 +10,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 
+
 BigCalendar.momentLocalizer(moment);
 class Calendar extends Component {
   state = {
@@ -26,21 +27,6 @@ class Calendar extends Component {
       console.log(this.props.user);
       return;
     }
-    axios.get('/api/stuff')
-      .then(res => {
-        this.setState({
-          stuff: res.data
-        });
-        console.log(this.state.stuff);
-        console.log("Something");
-      })
-      .catch(err => {
-        // if we got an error, we'll just log it and set stuff to an empty array
-        console.log(err);
-        this.setState({
-          stuff: []
-        });
-      });
     this.loadDates();
   }
   loadDates = () =>{
@@ -112,7 +98,6 @@ class Calendar extends Component {
             float: 'right'
           }}
           />
-
           </Dialog>
           </div>
         }

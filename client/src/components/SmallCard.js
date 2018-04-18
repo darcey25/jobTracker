@@ -13,7 +13,6 @@ class SmallCard extends Component{
     cardData: [],
     open: false,
     currentSelectData: [],
-    stage: null,
   };
 
 componentDidMount() {
@@ -26,23 +25,12 @@ loadCards = () => {
     )
 };
 
-
 deleteJob = id => {
   axios.delete('/api/newjob/' + id)
   .then(res=>
   this.loadCards())
   .catch(err => console.log(err));
-
 };
-
-handleStage = (event) => {
-    const value = event.target.innerHTML;
-    console.log(value);
-    this.setState({
-      stage: value
-    });
-  };
-
 
 handleOpen = (data) => {
     this.setState({currentSelectData: data})
@@ -53,9 +41,11 @@ handleClose = () => {
     this.setState({open: false});
 };
 
-
-
 render(){
+
+  let activeCard  = this.state.cardData.filter(val => {
+   return val.stage === this.props.activeTab
+    });
 
   return(
   <div
@@ -64,8 +54,7 @@ render(){
       flexWrap: "wrap"
     }}
     >
-    {this.state.cardData.map((item, index)=>{
-
+    {activeCard.map((item, index)=>{
       return(
         <Card key={index}
           className="jobCard"
@@ -108,9 +97,7 @@ render(){
                     float: "right"
                   }}
                   className="material-icons">delete</FontIcon>
-
-              </FlatButton>
-
+              </FlatButton>              
 
             </CardActions>
           </Card>
@@ -125,7 +112,7 @@ render(){
           >
             <CardExpand
             cardData = {this.state.currentSelectData}
-            handleStage={this.handleStage}/>
+            loadCards = {this.loadCards}/>
           </Dialog>
         </div>
   </div>

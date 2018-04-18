@@ -7,6 +7,10 @@ import Navtabs from './Navtabs';
 import LoginButton from './LoginButton';
 import LoginMenu from './LoginMenu';
 import {Tabs, Tab} from 'material-ui'
+<<<<<<< HEAD
+import NavTabs from './Navtabs';
+=======
+>>>>>>> b9a336f09ba66df1a4a39f4333020420f80186e9
 import { update } from '../services/withUser';
 
 class Navbar extends Component {

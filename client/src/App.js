@@ -6,7 +6,6 @@ import {lightBlue500, orange500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Navbar from './components/Nav';
 import { withUser, update } from './services/withUser';
-
 import CreateAccountPage from './pages/CreateAccountPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -22,7 +21,7 @@ class App extends Component {
     primaryColor: "",
     accentColor: "",
     activeTab: "apply",
-    value: "apply"
+    value: ""
   };
 
   componentDidMount() {
@@ -34,7 +33,6 @@ class App extends Component {
         // if we get here, the user's session is still good. we'll update the user
         // to make sure we're using the most recent values just in case
         update(res.data);
-        console.log(res.data)
         this.setState({primaryColor: res.data.primaryColor})
         this.setState({accentColor: res.data.accentColor})
       })
@@ -46,10 +44,10 @@ class App extends Component {
       });
   };
 
+ 
   handleClick = (active) => {
     this.setState({activeTab: active});
-    console.log("current tab " + this.state.activeTab)
-  };
+   };
 
   handleChange = (value) => {
     this.setState({
@@ -57,10 +55,7 @@ class App extends Component {
     });
   };
 
-
   render() {
-    console.log("ActiveTab " + this.state.activeTab);
-    console.log("value " + this.state.value);
     const { user } = this.props;
 
     const muiTheme = getMuiTheme({
@@ -69,25 +64,6 @@ class App extends Component {
           accent1Color: orange500,
         },
       });
-
-
-  //   Code to change themes
-  // var muiTheme;
-  //   if(this.state.primaryColor === ""){
-  //    muiTheme = getMuiTheme({
-  //     palette: {
-  //       primary1Color: lightBlue500,
-  //       accent1Color: orange500,
-  //     },
-  //   });
-  // }else{
-  //  muiTheme = getMuiTheme({
-  //   palette: {
-  //     primary1Color: this.state.primaryColor,
-  //     accent1Color: this.state.accentColor,
-  //   },
-  // });
-  // }
 
     return (
       <Router>
@@ -101,7 +77,7 @@ class App extends Component {
               handleClick={this.handleClick}
             />
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route exact path="/" render={()=><HomePage activeTab={this.state.activeTab} />}/>
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/create" component={CreateAccountPage} />
               <Route exact path="/map" component={MapPage} />

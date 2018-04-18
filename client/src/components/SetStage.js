@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
@@ -11,14 +10,6 @@ class SetStage extends Component {
     open: false,
     id: this.props.id,
   };
-
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     open: false,
-  //   };
-  // }
 
   handleClick = (event) => {
     // This prevents ghost click.
@@ -36,22 +27,6 @@ class SetStage extends Component {
     });
   };
 
-  // handleStage = (event) => {
-  //   const value = event.target.innerHTML;
-  //   console.log(value);
-  //   this.setState({
-  //     stage: value
-  //   });
-  // };
-  UpdateStage = (id, stage) => {
-    console.log("test" + stage);
-    axios.patch('/api/newjob/' + id, {
-      stage: stage
-    })
-    .then(res=> res.json())
-    .catch(err=> console.log(err));
-};
-
   render() {
     return (
       <div
@@ -60,6 +35,8 @@ class SetStage extends Component {
         <RaisedButton
           onClick={this.handleClick}
           label="Set Stage"
+          secondary={true}
+          
         />
         <Popover
           open={this.state.open}
@@ -69,11 +46,26 @@ class SetStage extends Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "apply")} primaryText="Need to Apply" value = "apply" />
-            <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "applied")} primaryText="Applied" value = "applied" />
-            <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "interviewing")} primaryText="Interviewing" value = "interviewing"/>
-            <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "offer")} primaryText="Offer" value = "offer" />
-            <MenuItem id = {this.state.id} onChange={this.props.handleStage} onClick={() => this.UpdateStage (this.state.id, "rejected")} primaryText="Rejected" value = "rejected"/>
+            <MenuItem id = {this.state.id} 
+            onClick={() =>this.props.handleStage("apply", this.state.id)} 
+            primaryText="To Apply" 
+            value = "apply" />
+            <MenuItem id = {this.state.id} 
+            onClick={() =>this.props.handleStage("applied", this.state.id)}  
+            primaryText="Applied" 
+            value = "applied" />
+            <MenuItem id = {this.state.id} 
+            onClick={() =>this.props.handleStage("interviewing", this.state.id)} 
+            primaryText="Interviewing" 
+            value = "interviewing"/>
+            <MenuItem id = {this.state.id} 
+            onClick={() =>this.props.handleStage("offer", this.state.id)} 
+            primaryText="Offer" 
+            value = "offer" />
+            <MenuItem id = {this.state.id} 
+            onClick={() =>this.props.handleStage("rejected", this.state.id)} 
+            primaryText="Rejected" 
+            value = "rejected"/>
 
           </Menu>
         </Popover>

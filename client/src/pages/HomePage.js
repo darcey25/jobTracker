@@ -1,36 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import axios from 'axios';
 import { withUser } from '../services/withUser';
 import SmallCard from '../components/SmallCard';
 import AddCardModal from '../components/AddCardModal';
 
 class HomePage extends Component {
   state = {
+
   }
   componentDidMount() {
     // only try loading stuff if the user is logged in.
     if (!this.props.user) {
-      console.log(this.props);
-      console.log(this.props.user);
       return;
     }
+ }
 
-    console.log(this.props);
-
-    axios.get('/api/stuff')
-      .then(res => {
-        this.setState({
-          stuff: res.data
-        });
-      })
-      .catch(err => {
-        // if we got an error, we'll just log it and set stuff to an empty array
-        console.log(err);
-        this.setState({
-          stuff: []
-        });
-      });
-  }
   render() {
     const { user } = this.props; // get the user prop from props
 
@@ -38,9 +21,9 @@ class HomePage extends Component {
       <Fragment>
         {user &&
           <div>
-          <SmallCard/>
+          <SmallCard activeTab = {this.props.activeTab}/>
           <AddCardModal/>
-          </div>
+        </div>
         }
         
         {!user &&
