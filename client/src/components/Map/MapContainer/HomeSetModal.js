@@ -10,9 +10,8 @@ import LocationSearchInput from "../../LocationSearchInput.js"
 class HomeSetModal extends Component {
   state = {
     address: "",
-    open: false,
+    open: this.props.modalOpen,
   }
-
 
   handleOpen = () => {
     this.setState({open: true});
@@ -35,16 +34,6 @@ handleFormSubmit = (event) => {
 
   const address = this.state.address;
   console.log(address);
-  // if (this.state.address && this.state.jobTitle){
-  //   axios.post('/api/newjob', {
-  //     companyName,
-  //     jobTitle,
-  //     cardColor,
-  //     titleColor
-  //   })
-  //   .then(res=> window.location.reload())
-  //   .catch(err=> console.log(err));
-  // }
 }
   render() {
 
