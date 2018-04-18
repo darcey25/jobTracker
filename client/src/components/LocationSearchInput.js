@@ -31,7 +31,8 @@ class LocationSearchInput extends Component {
         }
         else if (this.props.purpose === 'setHome') {
           axios.patch('/api/user/' + this.props.userId, {
-            position: latLng
+            position: latLng,
+            homeSet: true
           })
         }
       })
@@ -40,6 +41,7 @@ class LocationSearchInput extends Component {
   render() {
     return (
       <PlacesAutocomplete
+        style={{marginLeft: 20}}
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
@@ -48,8 +50,9 @@ class LocationSearchInput extends Component {
           <div>
             <input
               {...getInputProps({
-                placeholder: 'Search Places ...',
-                className: 'location-search-input'
+                placeholder: 'Search Address ...',
+                className: 'location-search-input',
+                style: {marginLeft: 20, height: 20, width: 385}
               })}
             />
             <div className="autocomplete-dropdown-container">

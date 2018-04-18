@@ -21,7 +21,8 @@ class App extends Component {
   state = {
     primaryColor: "",
     accentColor: "",
-    filter: "",
+    activeTab: "apply",
+    value: "apply"
   };
 
   componentDidMount() {
@@ -44,14 +45,21 @@ class App extends Component {
         }
       });
   };
-  handleFilter = (event) => {
-    const value = event.target.innerHTML;
+
+  handleClick = (active) => {
+    this.setState({activeTab: active});
+    console.log("current tab " + this.state.activeTab)
+  };
+
+  handleChange = (value) => {
     this.setState({
-      filter: value
+      value: value,
     });
   };
 
   render() {
+    console.log("ActiveTab " + this.state.activeTab);
+    console.log("value " + this.state.value);
     const { user } = this.props;
 
     const muiTheme = getMuiTheme({
@@ -67,8 +75,11 @@ class App extends Component {
         <MuiThemeProvider muiTheme={muiTheme}>
           <Fragment>
             <Navbar
+              activeTab={this.state.activeTab}
+              value={this.state.value}
               user={user}
-              handleFilter = {this.handleFilter}
+              handleChange={this.handleChange}
+              handleClick={this.handleClick}
             />
             <Switch>
               <Route handleFilter={this.handleFilter} exact path="/" component={HomePage} />

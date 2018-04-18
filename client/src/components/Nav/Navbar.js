@@ -5,21 +5,23 @@ import AppBar from 'material-ui/AppBar';
 import  Sidedrawer from '../Sidedrawer';
 import LoginButton from '../LoginButton';
 import LoginMenu from '../LoginMenu';
-import NavTabs from '../Navtabs';
-
+import Navtabs from '../Navtabs';
 import { update } from '../../services/withUser';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class Navbar extends Component {
-state={
 
-}
+  state = {
+    activeTab: this.props.activeTab,
+    value: this.props.value
+  };
 
 
+  
   handleLogIn = () => {
     this.props.history.push('/login');
   };
-
+  
   handleLogOut = () => {
     axios.delete('/api/auth')
       .then(() => {
@@ -33,9 +35,11 @@ state={
   };
 
   render() {
-  const { user } = this.props;
-  const username = user ? user.username : null;
-
+    console.log("hi I am in navbar");
+  console.log("activeTab " + this.state.activeTab);
+  console.log("Value " + this.state.value);
+    const { user } = this.props;
+    const username = user ? user.username : null;
   return (
   
     <Router>
@@ -51,7 +55,7 @@ state={
         height: "auto",
       }}
       className="AppBar"
-      title={user ? <NavTabs handleFilter = {this.props.handleFilter} /> : "Cool App Name"}
+      title={user ? <Navtabs handleChange={this.props.handleChange} value={this.state.value} handleClick={this.props.handleClick}/> : "Cool App Name"}
       showMenuIconButton={true}
       iconElementLeft={
         <Sidedrawer/>
@@ -86,6 +90,7 @@ state={
     </Router>
 
   )
+}
 };
 }
 export default withRouter(Navbar);
