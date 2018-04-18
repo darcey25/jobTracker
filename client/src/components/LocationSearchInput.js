@@ -24,6 +24,7 @@ class LocationSearchInput extends Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => {
         console.log('Success', latLng);
+        console.log(this.props.purpose);
         if (this.props.purpose === 'setMarker') {
           axios.patch('/api/newjob/' + this.props.id, {
             position: latLng
