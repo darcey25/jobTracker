@@ -148,6 +148,7 @@ class Contacts extends Component {
           innerDivStyle={{marginLeft: 0}}
           leftIcon={<Location color={indigo500} />}
           primaryText={<LocationSearchInput id={this.state.id}
+          purpose={'setMarker'}
           style={style}
          />}
         />

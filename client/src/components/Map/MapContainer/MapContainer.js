@@ -15,6 +15,7 @@ export class MapContainer extends Component {
 
   componentDidMount() {
     this.loadLocations();
+    console.log(this.props.home);
   }
 
   loadLocations = () => {
@@ -77,7 +78,7 @@ render() {
           onClick={this.onMarkerClick}
           title={'Home'}
           name={'Home'}
-
+          position={this.props.home}
         />
         {this.state.markers.map(item => {
           return (
