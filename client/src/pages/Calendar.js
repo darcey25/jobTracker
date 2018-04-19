@@ -8,6 +8,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import  { Redirect } from 'react-router-dom';
 
 
 
@@ -106,7 +107,7 @@ class Calendar extends Component {
           </div>
         }
         {!user &&
-          <div>Hey! I don't recognize you! Register and log in using the link above</div>
+           <Redirect to='/login'  />
         }
       </Fragment>
     );
