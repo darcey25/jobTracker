@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component, Fragment } from 'react';
 import { withUser } from '../services/withUser';
 import LoadingContainer from '../components/Map/LoadingContainer';
+import  { Redirect } from 'react-router-dom';
 
 class MapPage extends Component {
   state = {
@@ -62,7 +63,7 @@ class MapPage extends Component {
             </div>
           }
           {!user &&
-            <div>Hey! I don't recognize you! Register and log in using the link above</div>
+           <Redirect to='/login'  />
           }
         </Fragment>
       );
