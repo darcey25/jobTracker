@@ -68,7 +68,7 @@ class Calendar extends Component {
   }
   render() {
     const { user } = this.props; // get the user prop from props
-
+    console.log(this.props.position + this.props.homeSet)
     return (
       <Fragment>
         {user &&

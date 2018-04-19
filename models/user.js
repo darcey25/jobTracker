@@ -36,14 +36,18 @@ const UserSchema = new Schema({
   homeSet: {
     type: Boolean,
     required: true,
-    default: false
+    default: true
   },
-  position: [
-    {
-      lat: { type: String, required: true },
-      lng: { type: String, required: true }
-    }
-  ]
+  position:{
+    type: [
+      {
+        lat: { type: String, required: true, default: "30.2672" },
+        lng: { type: String, required: true, default: "-97.7431" }
+      }
+    ],
+    default :[{lat : '30.2672', lng: '-97.7431'}]
+
+  }
 });
 
 // This pre "save" handler will be called before each time the user is saved.

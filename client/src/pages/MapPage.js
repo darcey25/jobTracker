@@ -8,21 +8,20 @@ class MapPage extends Component {
   state = {
     stuff: null,
     locations: [],
-    homeSet: false,
+    homeSet: this.props.user.homeSet,
     home: {
-      "lat": 30.2672,
-      "lng": -97.7431
+      "lat": this.props.user.position[0].lat,
+      "lng": this.props.user.position[0].lng
     }
   }
 
   componentDidMount() {
     // only try loading stuff if the user is logged in.
+    console.log(this.props)
     if (!this.props.user) {
       console.log("No user detected");
       return;
     }
-
-    this.loadHome();
   }
 
   loadHome = () => {
