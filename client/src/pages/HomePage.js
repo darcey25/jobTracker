@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { withUser } from '../services/withUser';
 import SmallCard from '../components/SmallCard';
 import AddCardModal from '../components/AddCardModal';
+import  { Redirect } from 'react-router-dom';
 
 class HomePage extends Component {
 
@@ -31,15 +32,7 @@ class HomePage extends Component {
         }
 
         {!user &&
-          <div
-            style={{
-              textAlign: "center",
-              margin: "auto 20px",
-              paddingTop: "30px",
-              fontFamily: "Lobster, cursive",
-              fontSize: "20px"
-            }}
-            >Hey! I don't recognize you! Register and log in using the link above</div>
+           <Redirect to='/login'  />
         }
       </Fragment>
     );
