@@ -7,21 +7,20 @@ class MapPage extends Component {
   state = {
     stuff: null,
     locations: [],
-    homeSet: false,
+    homeSet: this.props.user.homeSet,
     home: {
-      "lat": 30.2672,
-      "lng": -97.7431
+      "lat": this.props.user.position[0].lat,
+      "lng": this.props.user.position[0].lng
     }
   }
 
   componentDidMount() {
     // only try loading stuff if the user is logged in.
+    console.log(this.props)
     if (!this.props.user) {
       console.log("No user detected");
       return;
     }
-
-    this.loadHome();
   }
 
   loadHome = () => {
@@ -62,7 +61,15 @@ class MapPage extends Component {
             </div>
           }
           {!user &&
-            <div>Hey! I don't recognize you! Register and log in using the link above</div>
+            <div
+              style={{
+                textAlign: "center",
+                margin: "auto 20px",
+                paddingTop: "30px",
+                fontFamily: "Lobster, cursive",
+                fontSize: "20px"
+              }}
+              >Hey! I don't recognize you! Register and log in using the link above</div>
           }
         </Fragment>
       );
