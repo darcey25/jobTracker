@@ -35,7 +35,7 @@ handleStage = (stage, id) => {
     })
     .then(res=> res.json())
     .catch(err=> console.log(err));
-    this.props.loadCards();
+    this.props.loadCards(this.props.userId);
   };
 
   handleClick = choice => {

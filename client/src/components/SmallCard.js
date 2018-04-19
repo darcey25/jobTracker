@@ -111,7 +111,9 @@ render(){
           >
             <CardExpand
             cardData = {this.state.currentSelectData}
-            loadCards = {this.loadCards}/>
+            loadCards = {this.loadCards}
+            userId= {this.props.userId}
+          />
           </Dialog>
         </div>
   </div>
