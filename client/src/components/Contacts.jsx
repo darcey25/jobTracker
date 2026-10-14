@@ -9,7 +9,7 @@ import CommunicationEmail from 'material-ui/svg-icons/communication/email';
 import Location from 'material-ui/svg-icons/communication/location-on';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import Subheader from 'material-ui/Subheader';
-import LocationSearchInput from "./LocationSearchInput.js"
+import LocationSearchInput from "./LocationSearchInput.jsx"
 
 class Contacts extends Component {
   state = {

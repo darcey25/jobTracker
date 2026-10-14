@@ -9,13 +9,8 @@ module.exports = function() {
     // so let's respond with an appropriate 403 Forbidden reponse
 
     // if the client says they want JSON, this is probably an AJAX call so let's respond with a JSON error
-    if (req.accepts('json')) {
-      res.status(403).json({
-        message: 'You must be logged in to perform this action.'
-      });
-    } else {
-      // otherwise, try and render a view named "forbidden"
-      res.status(403).render('forbidden');
-    }
+    res.status(403).json({
+      message: 'You must be logged in to perform this action.'
+    });
   }
 }

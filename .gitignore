@@ -61,3 +61,6 @@ typings/
 
 # dotenv environment variables file
 .env
+# Build output and macOS metadata
+client/build
+.DS_Store

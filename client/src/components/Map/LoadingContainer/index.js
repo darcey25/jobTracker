@@ -1,1 +1,1 @@
-export { default } from "./LoadingContainer.js";
+export { default } from "./LoadingContainer.jsx";

@@ -1,9 +1,23 @@
 const express = require('express');
 const passport = require('passport');
+const mongoose = require('mongoose');
 const router = express.Router();
 const db = require('../models');
-// const jobController = require("../controller/jobController");
 const mustBeLoggedIn = require('../shared/middleware/mustBeLoggedIn');
+
+// Fields clients may change. Anything else in a request body (password,
+// userId, _id, ...) is ignored.
+const USER_FIELDS = ['primaryColor', 'accentColor', 'homeSet', 'position'];
+const JOB_FIELDS = ['companyName', 'jobTitle', 'stage', 'cardColor', 'titleColor',
+  'info', 'dateInfo', 'notes', 'contacts', 'position'];
+
+function pick(source, fields) {
+  const result = {};
+  fields.forEach(field => {
+    if (source && source[field] !== undefined) result[field] = source[field];
+  });
+  return result;
+}
 
 function getCurrentUser(req, res) {
   // I'm picking only the specific fields its OK for the audience to see publicly
@@ -15,10 +29,32 @@ function getCurrentUser(req, res) {
   });
 }
 
+// Only allow a logged-in user to act on their own account.
+function mustBeSelf(param) {
+  return (req, res, next) => {
+    if (req.params[param] !== String(req.user._id)) {
+      return res.status(403).json({ message: 'You can only access your own data.' });
+    }
+    next();
+  };
+}
+
+// Load a job by :id and make sure it belongs to the logged-in user.
+async function loadOwnJob(req, res, next) {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return res.status(404).json({ message: 'Job not found.' });
+  }
+  const job = await db.NewJob.findById(req.params.id);
+  if (!job || job.userId !== String(req.user._id)) {
+    return res.status(404).json({ message: 'Job not found.' });
+  }
+  req.job = job;
+  next();
+}
+
 router.route('/auth')
   // GET to /api/auth will return current logged in user info
   .get((req, res) => {
-    console.log(req.body)
     if (!req.user) {
       return res.status(401).json({
         message: 'You are not currently logged in.'
@@ -38,38 +74,38 @@ router.route('/auth')
     getCurrentUser(req, res);
   })
   // DELETE to /api/auth will log the user out
-  .delete((req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.json({
-      message: 'You have been logged out.'
+  .delete((req, res, next) => {
+    req.logout(err => {
+      if (err) return next(err);
+      req.session.destroy(() => {
+        res.json({
+          message: 'You have been logged out.'
+        });
+      });
     });
   });
 
 router.route('/users')
   // POST to /api/users will create a new user
-  .post((req, res, next) => {
-    db.User.create(req.body)
-      .then(user => {
-        const { id, username } = user;
-        res.json({
-          id, username
+  .post(async (req, res, next) => {
+    const { username, password } = req.body || {};
+    if (typeof username !== 'string' || !username.trim() || typeof password !== 'string' || !password) {
+      return res.status(400).json({ message: 'Username and password are required.' });
+    }
+    try {
+      const user = await db.User.create({ username: username.trim(), password });
+      res.json({ id: user.id, username: user.username });
+    } catch (err) {
+      // if this error code is thrown, that means the username already exists.
+      if (err.code === 11000) {
+        return res.status(400).json({
+          message: 'Username already in use.'
         });
-      })
-      .catch(err => {
-        // if this error code is thrown, that means the username already exists.
-        // let's handle that nicely by redirecting them back to the create screen
-        // with that flash message
-        if (err.code === 11000) {
-          res.status(400).json({
-            message: 'Username already in use.'
-          })
-        }
-
-        // otherwise, it's some nasty unexpected error, so we'll just send it off to
-        // to the next middleware to handle the error.
-        next(err);
-      });
+      }
+      // otherwise, it's some nasty unexpected error, so we'll just send it off to
+      // to the next middleware to handle the error.
+      next(err);
+    }
   });
 
 // this route is just returns an array of strings if the user is logged in
@@ -82,107 +118,60 @@ router.route('/stuff')
   });
 
 router.route('/user/:id')
-  .get((req, res)=>{
-    console.log(req.body)
-    db.User.findOne({ _id: req.params.id }, function (err, data) {
-    res.json(data);
+  .all(mustBeLoggedIn(), mustBeSelf('id'))
+  .get(async (req, res) => {
+    const user = await db.User.findById(req.params.id).select('-password');
+    res.json(user);
   })
-    .catch(err=> res.status(422).json(err));
-  });
-
-router.route('/user/:id')
-  .patch((req, res)=>{
-    console.log(req.body)
-    db.User.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, data) {
+  .patch(async (req, res) => {
+    await db.User.updateOne({ _id: req.params.id }, { $set: pick(req.body, USER_FIELDS) }, { runValidators: true });
     res.json();
-  })
-    .catch(err=> res.status(422).json(err));
   });
 
 router.route('/newjob')
-  .post((req, res) =>{
-    db.NewJob.create(req.body)
-    .then(dbNewJob =>{
-      res.json(dbNewJob);
-    })
-    .catch(err => res.status(422).json(err));
-  });
-
-  router.route('/newjob')
-  .get((req, res)=>{
-    db.NewJob.find()
-    .then(dbNewJob=>{
-      res.json(dbNewJob);
-    })
-    .catch(err=> res.status(422).json(err));
-        // console.log(res);
-
-  });
-
-  router.route('/job/:userId')
-  .get((req, res)=>{
-    db.NewJob.find({ userId: req.params.userId })
-    .then(dbNewJob=>{
-      res.json(dbNewJob);
-    })
-    .catch(err=> res.status(422).json(err));
-        // console.log(res);
-
-  });
-
-  router.route('/newjob/:id')
-
-  .delete((req, res)=>{
-    console.log("test");
-    db.NewJob.findById({ _id: req.params.id })
-    .then(dbNewJob => dbNewJob.remove())
-    .then(dbNewJob=> res.json(dbNewJob))
-    .catch(err=> res.status(422).json(err));
-  });
-
-router.route('/newjob/:id')
-  .patch((req, res)=>{
-    console.log(req.body)
-    db.NewJob.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, data) {
-    res.json();
+  .all(mustBeLoggedIn())
+  .post(async (req, res) => {
+    try {
+      const job = await db.NewJob.create({ ...pick(req.body, JOB_FIELDS), userId: String(req.user._id) });
+      res.json(job);
+    } catch (err) {
+      res.status(422).json({ message: err.message });
+    }
   })
-    // .catch(err=> res.status(422).json(err));
+  // Only the current user's jobs
+  .get(async (req, res) => {
+    res.json(await db.NewJob.find({ userId: String(req.user._id) }));
   });
 
-
-  router.route('/newjob/:id')
-    .get((req, res)=>{
-      db.NewJob.findOne({ _id: req.params.id }, req.body, function (err, data) {
-        console.log(data);
-      res.json(data);
-    })
-      // .catch(err=> res.status(422).json(err));
-    });
-
-// router.route('/newjob')
-//   .post(jobController.create);
-//
-
-router.route('/locations')
-.get((req, res)=>{
-  db.NewJob.find()
-  .then(dbNewJob=>{
-    res.json(dbNewJob);
-  })
-  .catch(err=> res.status(422).json(err));
-      // console.log(res);
-
+router.get('/job/:userId', mustBeLoggedIn(), mustBeSelf('userId'), async (req, res) => {
+  res.json(await db.NewJob.find({ userId: req.params.userId }));
 });
 
-router.route('/locations/:userId')
-.get((req, res)=>{
-  db.NewJob.find({ userId: req.params.userId })
-  .then(dbNewJob=>{
-    res.json(dbNewJob);
+router.route('/newjob/:id')
+  .all(mustBeLoggedIn(), loadOwnJob)
+  .get((req, res) => {
+    res.json(req.job);
   })
-  .catch(err=> res.status(422).json(err));
-      // console.log(res);
+  .patch(async (req, res) => {
+    try {
+      req.job.set(pick(req.body, JOB_FIELDS));
+      await req.job.save();
+      res.json();
+    } catch (err) {
+      res.status(422).json({ message: err.message });
+    }
+  })
+  .delete(async (req, res) => {
+    await req.job.deleteOne();
+    res.json(req.job);
+  });
 
+router.get('/locations', mustBeLoggedIn(), async (req, res) => {
+  res.json(await db.NewJob.find({ userId: String(req.user._id) }));
+});
+
+router.get('/locations/:userId', mustBeLoggedIn(), mustBeSelf('userId'), async (req, res) => {
+  res.json(await db.NewJob.find({ userId: req.params.userId }));
 });
 
 module.exports = router;
