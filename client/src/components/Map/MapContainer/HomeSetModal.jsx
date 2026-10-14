@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import LocationSearchInput from "../../LocationSearchInput.js";
+import LocationSearchInput from "../../LocationSearchInput.jsx";
 
 class HomeSetModal extends Component {
   state = {

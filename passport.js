@@ -6,13 +6,23 @@ const db = require('./models');
 
 // export a function that receives the Express app we will configure for Passport
 module.exports = (app) => {
+  // Set SESSION_SECRET in production. Without it, a random secret is used,
+  // which logs everyone out whenever the server restarts.
+  let sessionSecret = process.env.SESSION_SECRET;
+  if (!sessionSecret) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('SESSION_SECRET must be set in production');
+    }
+    sessionSecret = require('crypto').randomBytes(32).toString('hex');
+  }
+
   // these two middlewares are required to make passport work with sessions
   // sessions are optional, but an easy solution to keeping users
   // logged in until they log out.
   app.use(cookieparser());
   app.use(session({
     // this should be changed to something cryptographically secure for production
-    secret: 'keyboard cat',
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     // automatically extends the session age on each request. useful if you want
@@ -28,7 +38,8 @@ module.exports = (app) => {
       // recommended you use this setting in production if you have a well-known domain you want to restrict the cookies to.
       // domain: 'your.domain.com',
       // recommended you use this setting in production if your site is published using HTTPS
-      // secure: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
     }
   }));
 

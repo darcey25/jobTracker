@@ -14,6 +14,6 @@ const LoadingContainer = (props) => (
   </div>
 )
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyBAQEBzkSGDkjSM4p4EukoAdsqQW-k_WVA'),
+  apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   LoadingContainer: LoadingContainer
 })(MapContainer)
